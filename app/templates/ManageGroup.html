@@ -16,21 +16,21 @@
     </ion-nav-title>
 
 
-    <ion-content padding="true" class="has-header">
-      <ion-list id="group-list6">
-        <ion-item class="item-avatar item-icon-right" id="group-list-item7">
-          <h2>Member 1</h2>
-          <i class="icon ion-android-more-vertical"></i>
-          <ion-option-button class="button-positive">gg</ion-option-button>
+    <ion-content class="has-header-and-footer has-tabs">
+      <ion-list class="list-long">
+
+
+        <ion-item ng-repeat="member in groupMembers track by $index" class="item-avatar item-icon-right" id="group-list-item7">
+            
+                <div class="inline-1">
+                    {{ member.Name }}
+                </div>
+                <div class="inline-2">
+                    <i class="icon ion-information-circeled" ng-click="showGroupMemberData(member)"></i>
+                </div>
+        
         </ion-item>
-        <ion-item class="item-avatar item-icon-right" id="group-list-item9">
-          <h2>Member 2</h2>
-          <i class="icon ion-android-more-vertical"></i>
-        </ion-item>
-        <ion-item class="item-avatar item-icon-right" id="group-list-item8">
-          <h2>Member 3</h2>
-          <i class="icon ion-android-more-vertical"></i>
-        </ion-item>
+       
       </ion-list>
     </ion-content>
   </ion-view>
