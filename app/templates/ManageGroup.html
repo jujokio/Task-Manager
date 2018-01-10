@@ -19,8 +19,11 @@
     <ion-content class="has-header-and-footer has-tabs">
       <ion-list class="list-long">
 
+        <h3 class="bar-header-h3">
+            Your group name
+        </h3>
 
-        <ion-item ng-repeat="member in groupMembers track by $index" class="item-avatar item-icon-right" id="group-list-item7">
+        <ion-item ng-repeat="member in groupMembers track by $index" class="item-avatar item-list item-icon-right" id="group-list-item7">
                 <div class="display-line">
                     <div class="inline-1">
                         {{ member.Name }}
@@ -32,9 +35,15 @@
         
         </ion-item>
 
-        <ion-item>
+        <h3 class="bar-header-h3">
+                Timeline
+        </h3>
+        <ion-list class="list-long">
+            <ion-item>
                 Here is the timeline
-        </ion-item>
+            </ion-item>
+        </ion-list>
+        
        
       </ion-list>
     </ion-content>

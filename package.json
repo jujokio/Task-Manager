@@ -62,7 +62,8 @@
   ],
   "cordova": {
     "platforms": [
-      "windows"
+      "windows",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-winstore-jscompat": {}

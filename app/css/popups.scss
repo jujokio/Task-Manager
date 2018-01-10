@@ -35,6 +35,7 @@
     
     .popup-body {
         font-size: 0.6em;
+        color: black;
         text-align: center !important;
     }
     
@@ -62,15 +63,15 @@
     .button.button-positive {
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $vesitietofi-button !important;
-        border-color: $vesitietofi-button !important;
+        background-color: $vesitietofi-button-background !important;
+        border-color: $vesitietofi-button-border !important;
     }
     
     .button-positive {
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $vesitietofi-button !important;
-        border-color : $vesitietofi-button !important;
+        background-color: $vesitietofi-button-background !important;
+        border-color : $vesitietofi-button-border !important;
     }
     
     .button-positive.activated {
@@ -127,6 +128,7 @@
     
     .popup-body {
         font-size: 0.8em !important;
+        color: black;
     }
 
     .popup-title {
@@ -154,15 +156,15 @@
     .button.button-positive {
         font-weight: bold !important;
         font-size: 0.8em !important;
-        background-color: $vesitietofi-button !important;
-        border-color: $vesitietofi-button !important;
+        background-color: $vesitietofi-button-background!important;
+        border-color: $vesitietofi-button-border !important;
     }
     
     .button-positive {
         font-weight: bold !important;
         font-size: 0.8em !important;
-        background-color: $vesitietofi-button !important;
-        border-color: $vesitietofi-button !important;
+        background-color: $vesitietofi-button-background!important;
+        border-color: $vesitietofi-button-border !important;
     }
     
     .button-positive.activated {

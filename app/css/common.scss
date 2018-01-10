@@ -16,6 +16,7 @@
 .menuContent{
     top: 60px;
 }
+
 .menulist-item {
     text-align: center;
 }
@@ -161,7 +162,6 @@ body {
 
 }
 
-
 .button-action {
     background-color: $vesitietofi-button-action;
     color: $vesitietofi-white;
@@ -259,6 +259,14 @@ body {
 .button-normal:enabled {
     background-color: $vesitietofi-lightblue;
     color: black;
+}
+
+.button-positive {
+    border-color: $vesitietofi-button-border !important;
+    background-color: $vesitietofi-button-background !important;
+    color: $vesitietofi-button-textcolor;
+    //left: 10%;
+    //text-align: left;
 }
 
 .button-positive-list {
@@ -564,6 +572,7 @@ input[disabled] {
     padding-left: 0px;
     padding-top: 0.5*$fontSize;
     padding-bottom: 0.5*$fontSize;
+    border: 1px solid;
     //text-align: center;
 }
 

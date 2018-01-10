@@ -39,8 +39,12 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
         console.log("submit");
         console.log($scope.Task);
         var text = "Send this: <br/> <br/>Duration: " + $scope.Task.duration +" <br/> <br/>Category: " + $scope.Task.category;
-        $rootScope.showDeferredAlert("Confirm", text).then(function(res){
-            $scope.Task = {};
+        $rootScope.showDeferredPopup("Confirm", text).then(function(res){
+            if(res){
+                console.log("sent");
+                $scope.Task = {};
+            }
+            
         });
         
     };
