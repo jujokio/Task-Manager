@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "cordova-android": "^6.3.0",
-    "cordova-ios": "^4.5.3",
     "cordova-plugin-winstore-jscompat": "0.0.6",
     "cordova-windows": "^5.0.0"
   },
@@ -63,9 +62,7 @@
   ],
   "cordova": {
     "platforms": [
-      "android",
-      "windows",
-      "ios"
+      "windows"
     ],
     "plugins": {
       "cordova-plugin-winstore-jscompat": {}

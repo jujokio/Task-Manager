@@ -95,7 +95,6 @@
 
     .config(function($ionicConfigProvider, $qProvider, RestangularProvider, $stateProvider, $urlRouterProvider) {
 
-
         //$qProvider.errorOnUnhandledRejections(false);
         $ionicConfigProvider.views.swipeBackEnabled(false);
         

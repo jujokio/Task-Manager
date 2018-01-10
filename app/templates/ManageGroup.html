@@ -21,14 +21,19 @@
 
 
         <ion-item ng-repeat="member in groupMembers track by $index" class="item-avatar item-icon-right" id="group-list-item7">
-            
-                <div class="inline-1">
-                    {{ member.Name }}
-                </div>
-                <div class="inline-2">
-                    <i class="icon ion-information-circeled" ng-click="showGroupMemberData(member)"></i>
+                <div class="display-line">
+                    <div class="inline-1">
+                        {{ member.Name }}
+                    </div>
+                    <div class="inline-2">
+                        <i class="icon ion-information-circled" ng-click="showGroupMemberData(member)"></i>
+                    </div>
                 </div>
         
+        </ion-item>
+
+        <ion-item>
+                Here is the timeline
         </ion-item>
        
       </ion-list>

@@ -34,12 +34,14 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
     ];
 
     $scope.showGroupMemberData = function(member){
-
-        var text = Json.stringfy(member);
+        var text = "Email: "+ member.Email + "<br/>Number: " + member.Number +  "<br/>Details: " + member.Other;
         $rootScope.showDeferredAlert(member.Name,text).then(function(){
             return;
         });
     }
+    
+
+    
     
 
 
