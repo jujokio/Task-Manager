@@ -4,8 +4,7 @@
   "private": true,
   "dependencies": {
     "cordova-android": "^6.3.0",
-    "cordova-plugin-winstore-jscompat": "0.0.6",
-    "cordova-windows": "^5.0.0"
+    "cordova-plugin-winstore-jscompat": "0.0.6"
   },
   "devDependencies": {
     "grunt": "~1.0.1",
@@ -62,7 +61,6 @@
   ],
   "cordova": {
     "platforms": [
-      "windows",
       "android"
     ],
     "plugins": {

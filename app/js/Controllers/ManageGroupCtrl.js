@@ -10,8 +10,18 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-  
+    
+        // watch activationFlags.tabInit and do init if changed
+        $scope.$watch('reloadActive.init', function() {
+            if($rootScope.activationFlags.tabInit){
+                    //$scope.init();
+                    $rootScope.activationFlags.tabInit = false;
+            }
+        });
 
+
+    $scope.expand = {};
+    $scope.expand.members = false;
     $scope.groupMembers = [
         {
             "Name":"member1",

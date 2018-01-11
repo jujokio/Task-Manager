@@ -17,21 +17,61 @@
         </div>
     </ion-nav-title>
 
-    <ion-content padding="true" class="has-header">
-      <div id="statistics-container3">
-        <ion-list id="statistics-list8">
-          <ion-item class="item-divider" id="statistics-list-item-divider3"> Your group</ion-item>
+    <ion-content class="has-header-and-footer has-tabs">
+        
+        <ion-list class="list">
+  
+            <h3 class="bar-header-h3" ng-click="expand.owngroup = !expand.owngroup">
+                    <div>
+                        Your group name ( {{ groupMembers.length }} )
+                        <i class="icon icon-button ion-minus-round" ng-if="expand.owngroup"></i>
+                        <i class="icon icon-button ion-plus-round" ng-if="!expand.owngroup" ></i>
+                    </div>
+            </h3>
+
+            <ion-item ng-if="expand.owngroup" class="item">
+                plotted image here
+            </ion-item>
+
+            <ion-item ng-if="expand.owngroup" class="item">
+                show more details here.
+            </ion-item>
         </ion-list>
-      </div>
-      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-        <button id="addATask-button1" class="button button-positive button-block" ng-click="print()">Submit</button>
-      </div>
-      <ion-list id="statistics-list9">
-        <ion-item class="item-divider" id="statistics-list-item-divider6"> Other group 1</ion-item>
-      </ion-list>
-      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-      </div>
+
+        <ion-list class="list">
+
+            <ion-item class="item-list">
+                <ion-item ng-repeat="group in groups track by group.Id">
+                    <ion-item class="item">
+                        <h3 class="bar-header-h3" ng-click="group.expand = !group.expand">
+                                <div>
+                                    {{ group.GroupName }} ( {{ group.Members.length }} )
+                                    <i class="icon icon-button ion-minus-round" ng-if="group.expand"></i>
+                                    <i class="icon icon-button ion-plus-round" ng-if="!group.expand" ></i>
+                                </div>
+                        </h3>
+                
+                        <ion-item ng-if="group.expand" class="item">
+                            plotted image here
+                        </ion-item>
+
+                    </ion-item>
+                </ion-item>
+            </ion-item>
+
+  
+            <h3 class="bar-header-h3" ng-click="expand.members = !expand.members">
+                    <div>
+                        Other group name ( {{ groupMembers.length }} )
+                        <i class="icon icon-button ion-minus-round" ng-if="expand.members"></i>
+                        <i class="icon icon-button ion-plus-round" ng-if="!expand.members" ></i>
+                    </div>
+            </h3>
+    
+            <ion-item class="item">
+                plotted image here
+            </ion-item>
+        </ion-list>
+
     </ion-content>
   </ion-view>

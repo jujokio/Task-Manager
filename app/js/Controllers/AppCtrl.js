@@ -27,6 +27,7 @@ angular.module('starter').controller('AppCtrl', function($cordovaNetwork, $cordo
     $rootScope.activationFlags.logoutActive = false; // logOut active flag.
     $rootScope.activationFlags.loading = false; // Loading active flag. true when anything is loading. restricts other from loading.
     $rootScope.activationFlags.isLoggedIn = false; // Log in success flag. True when logged in.
+    $rootScope.activationFlags.tabInit = false;
 
     $rootScope.SidemenuList = [
         {"value":"Login", "enum":0},
