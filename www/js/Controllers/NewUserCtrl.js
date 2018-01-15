@@ -2,7 +2,7 @@
 
 
 
-angular.module('starter').controller('LoginCtrl', function($scope, $rootScope, $state) {
+angular.module('starter').controller('NewUserCtrl', function($q, $scope, $rootScope, $state) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -12,49 +12,44 @@ angular.module('starter').controller('LoginCtrl', function($scope, $rootScope, $
     //});
   
         
-        $scope.loginInfo= {};
-        $scope.loginInfo.password="d";
-        $scope.loginInfo.email="d";   
+        $scope.userInfo = {};   
              
 
-        $scope.doLogin = function (){
-            console.log("login");
-            
+        $scope.doRegister = function (){
             var loginJSON = {
-                "student_name":$scope.loginInfo.studentName,
-                "email":$scope.loginInfo.email,
-                "password":$scope.loginInfo.password,
-                "mac_address":$scope.loginInfo.mac
+                "student_name":$scope.userInfo.studentName,
+                "email":$scope.userInfo.email,
+                "student_number":$scope.userInfo.studentNumber,
+                "password":$scope.userInfo.password,
+                "phone_number":$scope.userInfo.studentName
             }
-            /*
             var baseUrl = "http://ec2-52-58-73-142.eu-central-1.compute.amazonaws.com:5000/";
             Restangular.setBaseUrl(baseUrl);
             Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
             Restangular.all("login").withHttpConfig().post(loginJSON).then(function(data) {
                 Restangular.setDefaultHeaders({'Authorization': 'Bearer ' +  data});
-                */
-                $scope.loginInfo= {};
                 console.log("login with:");
-                console.log(loginJSON);
+                console.log($scope.userInfo);
+                $scope.userInfo= {};
                 $state.go('tab.AddTask', {}, {
                     reload: true
                 });
                 
-            
 
-            //});
+
+            });
         };
 
 
 
 
-
-        $scope.goToNewUser = function (){
-            console.log("go to new user");
-            $state.go('NewUser', {}, {
+        
+        $scope.goToLogin = function (){
+            $scope.userInfo= {};
+            $state.go('Login', {}, {
                 reload: true
             });
-            $scope.loginInfo= {};
+           
         };
   
   });

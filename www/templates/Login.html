@@ -22,15 +22,19 @@
             <div class="list-short">
 
                 <ion-item>
-                    <label class="label">Username<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="loginInfo.username"/></label>
+                    <label class="label">Email<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="loginInfo.email"/></label>
                 </ion-item>
 
                 <ion-item>
                     <label class="label">Password<input class="input-label" type="password" ng-disabled="loginActive"  ng-model="loginInfo.password"/></label>
                 </ion-item>
 
+             
+                <u class="item-interact" ng-click="goToNewUser()">Create new user</u>
+                
+
                 <label class="item">
-                    <button class="button button-block button-positive button-noleft button-positive-list" id="loginButton" ng-if="loginInfo.username && loginInfo.password" ng-click="doLogin()">
+                    <button class="button button-block button-positive button-noleft button-positive-list" id="loginButton" ng-if="loginInfo.email && loginInfo.password" ng-click="doLogin()">
                         <i class="icon ion-log-in"></i>
                         LOG IN
                     </button>

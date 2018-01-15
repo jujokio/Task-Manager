@@ -46,17 +46,11 @@
 
 
         document.addEventListener("deviceready", function() {
-            if (ionic.Platform.is('browser') ) {
-                $rootScope.deviceModel = "Browser";
-                $rootScope.currentPlatform = "Browser";
-                $rootScope.currentPlatformVersion = "Browser";
-                $rootScope.manufacturer = "Browser";
-            }else{
-                $rootScope.deviceModel = $cordovaDevice.getModel();
-                $rootScope.currentPlatform = $cordovaDevice.getPlatform();
-                $rootScope.currentPlatformVersion = $cordovaDevice.getVersion();
-                $rootScope.manufacturer = $cordovaDevice.getManufacturer();
-            }
+
+            $rootScope.deviceModel = $cordovaDevice.getModel();
+            $rootScope.currentPlatform = $cordovaDevice.getPlatform();
+            $rootScope.currentPlatformVersion = $cordovaDevice.getVersion();
+            $rootScope.manufacturer = $cordovaDevice.getManufacturer();
 
             console.log("currentPlatform: " + $rootScope.currentPlatform);
             console.log("currentPlatformVersion: " + $rootScope.currentPlatformVersion);
@@ -117,7 +111,11 @@
             controller: 'LoginCtrl'
         })
 
-
+        .state('NewUser', {
+            url: '/NewUser',
+            templateUrl: 'templates/NewUser.html',
+            controller: 'NewUserCtrl'
+        })
 
         // setup an abstract state for the tabs directive
         .state('tab', {

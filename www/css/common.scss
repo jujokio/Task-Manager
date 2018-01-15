@@ -80,7 +80,7 @@
 
 .bar-header-h3 {// väliotsikot ok
     font-weight: normal !important;
-    font-size: $fontSize*0.9;
+    font-size: $fontSize !important;
     padding:5px !important;
     border-bottom: 1px solid black;
     margin-top: 0px;
@@ -536,6 +536,8 @@ input[disabled] {
     font-size: 0.7*$fontSize;
     overflow: visible !important;
     padding-top: 0px;
+    //padding-left: 0px;
+    //padding-right: 0px;
     padding-bottom: 0.2*$fontSize;
     line-height: 1.3*$fontSize;
     border: 0px;
@@ -573,7 +575,7 @@ input[disabled] {
     padding-left: 0px;
     padding-top: 0.5*$fontSize;
     padding-bottom: 0.5*$fontSize;
-    border: 1px solid;
+    //border: 1px solid;
     //text-align: center;
 }
 

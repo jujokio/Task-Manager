@@ -1,0 +1,65 @@
+<ion-view hide-back-button="true">
+    <ion-nav-title>
+        <div class="bar-header-divider">
+            <div class="bar-header-divider-left">
+                <img class="bar-header-logo" src="img/ionic.png" id="logo"></img>
+            </div>
+            
+            <div class="bar-header-divider-center">
+                <h4 class="bar-header-h4">LOG IN</h4>
+            </div>
+
+            <div class="bar-header-divider-right">
+                <img class="ion-log-out button-image" hidden="true" ng-click="logOut()" src="img/Logout.png"></img>
+            </div>
+        </div>
+    </ion-nav-title>
+            
+
+  <ion-content class="has-header">
+
+        <ion-list class="item-list">
+            <div class="list-long">
+
+                <ion-item>
+                    <label class="label">Name<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentName"/></label>
+                
+
+               
+                    <label class="label">Student number<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentNumber"/></label>
+               
+
+                    <label class="label">Email<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.email"/></label>
+               
+
+              
+                    <label class="label">Phone number<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.phoneNumber"/></label>
+                
+
+              
+                    <label class="label">Password<input class="input-label" type="password" ng-disabled="loginActive"  ng-model="userInfo.password"/></label>
+               
+               
+                    <label class="label">Repeat password<input class=" item input-label" type="password" ng-disabled="loginActive" ng-model="userInfo.confirmPassword"/></label>
+                </ion-item>
+
+
+
+                <label class="item">
+                    <button ng-if="userInfo.password === userInfo.confirmPassword && userInfo.password!=null " class="button button-block button-positive button-noleft button-positive-list" ng-click="createUser()">
+                        <i class="icon ion-person-add"></i>
+                        Create new user
+                    </button>
+                </label>
+
+                <label class="item">
+                    <button class="button button-block button-close button-noleft button-positive-list" ng-click="goToLogin()">
+                        <i class="icon ion-arrow-return-left"></i>
+                        Back
+                    </button>
+                </label>
+                
+            </div>  
+        </ion-list>
+    </ion-content>
+</ion-view>

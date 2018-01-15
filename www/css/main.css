@@ -90,7 +90,7 @@
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\0000381}}
 .bar-header-h3 {
   font-weight: normal !important;
-  font-size: 18px;
+  font-size: 20px !important;
   padding: 5px !important;
   border-bottom: 1px solid black;
   margin-top: 0px;
@@ -612,17 +612,17 @@ input[disabled] {
   margin-bottom: 1px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003545}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003547}}
 .item-button-right {
   overflow: hidden;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003549}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003551}}
 .item-calculation {
   margin-top: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003553}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003555}}
 .item-checkbox {
   border: 0px;
   margin: 0px;
@@ -632,27 +632,26 @@ input[disabled] {
   padding-bottom: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003562}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003564}}
 .item-content {
   overflow: visible !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003566}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003568}}
 .item-interact {
   color: #a1511c;
   text-decoration: underline;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003571}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003573}}
 .item-list {
   padding-right: 0px;
   padding-left: 0px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003580}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003582}}
 .item-radio {
   padding: 0px !important;
   border: 1px solid #a1511c;
@@ -664,12 +663,12 @@ input[disabled] {
   font-weight: 500;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003591}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003593}}
 .item-radio input:checked ~ .item-content {
   background-color: #a1511c !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003595}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003597}}
 .item-select select {
   max-width: 40%;
   overflow-x: hidden;
@@ -677,7 +676,7 @@ input[disabled] {
   background: #f4a460;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003602}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003604}}
 .item-select .input-label {
   max-width: 50%;
   width: 50%;
@@ -685,48 +684,48 @@ input[disabled] {
   font-size: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003609}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003611}}
 .item-title-left {
   margin-top: 0;
   min-height: 47px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003614}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003616}}
 .item-toggle {
   color: #6a6a6a;
   padding-top: 10px;
   padding-right: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003621}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003623}}
 .label {
   color: #6a6a6a;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003625}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003627}}
 .label-rating-good {
   color: #a1511c;
   font-weight: 900;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003629}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003631}}
 .label-rating-neutral {
   color: #6a6a6a;
   font-weight: 900;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003633}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003635}}
 .label-rating-bad {
   color: #FF0000;
   font-weight: 900;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003638}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003640}}
 .last-element {
   margin-bottom: 45px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003642}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003644}}
 .leaflet-control-custom {
   width: 48px;
   height: 48px;
@@ -736,32 +735,32 @@ input[disabled] {
   text-align: center;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003651}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003653}}
 .leaflet-control-custom:before {
   font-size: 34px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003655}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003657}}
 .leaflet-control-custom-active {
   color: #a1511c !important;
   padding-top: 6px;
   padding-bottom: 6px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003661}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003663}}
 .leaflet-control-custom-inactive {
   color: gray !important;
   padding-top: 6px;
   padding-bottom: 6px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003667}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003669}}
 .list {
   margin: 0px;
   padding: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003675}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003677}}
 .list-long {
   padding-top: 10px;
   padding-bottom: 0px;
@@ -770,7 +769,7 @@ input[disabled] {
   text-align: -webkit-center;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003683}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003685}}
 .list-short {
   padding-top: 40px;
   padding-bottom: 0px;
@@ -779,61 +778,61 @@ input[disabled] {
   text-align: -webkit-center;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003691}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003693}}
 .list-icon {
   vertical-align: middle;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003695}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003697}}
 #map {
   width: 100%;
   height: 90%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003700}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003702}}
 #map_modal {
   width: 100%;
   height: 80%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003705}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003707}}
 #mapFooter {
   width: 100%;
   height: 10%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003710}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003712}}
 .modal-title {
   width: 65%;
   padding-top: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003715}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003717}}
 .no-name {
   width: 70% !important;
   text-align: left;
   padding-left: 10%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003721}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003723}}
 .offline {
   color: #FF0000 !important;
   font-weight: 900;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003726}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003728}}
 .overflow-scroll {
   overflow-y: hidden;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003730}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003732}}
 .photo {
   padding: 10px;
   margin-top: 20px;
   border: 1px solid #a1511c;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003738}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003740}}
 .photo img {
   margin-left: auto;
   margin-right: auto;
@@ -841,39 +840,39 @@ input[disabled] {
   max-width: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003746}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003748}}
 .photo-caption-container {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003752}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003754}}
 .photo-container, .photo-caption-container {
   border: 0px solid #a1511c;
   display: inline-flex;
   justify-content: center;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003758}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003760}}
 #photo-scroll {
   height: auto;
   padding-left: 10px;
   padding-right: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003764}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003766}}
 .photos-footer {
   margin-top: 30px;
   height: 20%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003769}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003771}}
 #privacy_policy {
   padding-right: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003773}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003775}}
 #privacy_policy, #usage_rights {
   float: left;
   cursor: pointer;
@@ -881,7 +880,7 @@ input[disabled] {
   color: #FFFFFF;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003780}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003782}}
 #privacy_policy, #usage_rights, #version_number, .footer-divider {
   padding-top: 3px;
   font-size: 16px;
@@ -889,7 +888,7 @@ input[disabled] {
   color: #FFFFFF;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003787}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003789}}
 .question-table {
   overflow: auto;
   margin-right: 10px;
@@ -910,35 +909,35 @@ input[disabled] {
   background-clip: padding-box;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003809}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003811}}
 .question-table tbody {
   width: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003813}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003815}}
 .question-table tbody tr {
   width: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003817}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003819}}
 .question-table td {
   padding: 10px;
   border: 1px solid #a1511c;
   min-width: 100px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003823}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003825}}
 .scroll {
   height: 100%;
   padding: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003828}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003830}}
 .select {
   padding: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003832}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003834}}
 .tab-item {
   padding-left: 5px;
   padding-right: 5px;
@@ -950,7 +949,7 @@ input[disabled] {
   font-weight: bold;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003841}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003843}}
 .tab-item-active {
   background-color: #a1511c !important;
   color: black !important;
@@ -963,7 +962,7 @@ input[disabled] {
   background-clip: padding-box;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003855}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003857}}
 #table-modal-map {
   width: 90%;
   height: 90%;
@@ -973,18 +972,18 @@ input[disabled] {
   left: 5%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003864}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003866}}
 .table-title {
   font-weight: bold;
   font-size: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003869}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003871}}
 .tab-single {
   width: 33%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003873}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003875}}
 .tabs {
   overflow-x: visible;
   overflow-y: visible;
@@ -993,27 +992,27 @@ input[disabled] {
   top: 44px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003881}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003883}}
 td.no-border {
   border: 0;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003887}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003889}}
 .text {
   font-size: 14px;
   padding: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003892}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003894}}
 .title {
   left: 0px !important;
   right: 0px !important;
   margin: 0px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003897}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003899}}
 .title-list {
   overflow-x: auto;
   top: 4px;
@@ -1021,33 +1020,33 @@ td.no-border {
   color: #6a6a6a;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003904}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003906}}
 .toggle {
   position: relative !important;
   top: 0px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003908}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003910}}
 .toggle input:checked + .track {
   border-color: #a1511c;
   background-color: #a1511c;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003913}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003915}}
 u {
   font-size: 14px;
   color: #a1511c;
   margin: 5%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003919}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003921}}
 #usage_rights {
   padding-left: 10px;
   font-size: 14px;
   color: #FFFFFF;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003925}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/common\.scss}line{font-family:\00003927}}
 #version_number {
   padding-right: 10px;
 }
