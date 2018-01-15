@@ -46,10 +46,17 @@
 
 
         document.addEventListener("deviceready", function() {
-            $rootScope.deviceModel = $cordovaDevice.getModel();
-            $rootScope.currentPlatform = $cordovaDevice.getPlatform();
-            $rootScope.currentPlatformVersion = $cordovaDevice.getVersion();
-            $rootScope.manufacturer = $cordovaDevice.getManufacturer();
+            if (ionic.Platform.is('browser') ) {
+                $rootScope.deviceModel = "Browser";
+                $rootScope.currentPlatform = "Browser";
+                $rootScope.currentPlatformVersion = "Browser";
+                $rootScope.manufacturer = "Browser";
+            }else{
+                $rootScope.deviceModel = $cordovaDevice.getModel();
+                $rootScope.currentPlatform = $cordovaDevice.getPlatform();
+                $rootScope.currentPlatformVersion = $cordovaDevice.getVersion();
+                $rootScope.manufacturer = $cordovaDevice.getManufacturer();
+            }
 
             console.log("currentPlatform: " + $rootScope.currentPlatform);
             console.log("currentPlatformVersion: " + $rootScope.currentPlatformVersion);

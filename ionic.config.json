@@ -2,7 +2,10 @@
   "name": "TaskManager",
   "version": "0.0.1",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "cordova-android": "^6.3.0",
+    "cordova-plugin-winstore-jscompat": "0.0.6"
+  },
   "devDependencies": {
     "grunt": "~1.0.1",
     "glob": "~4.3.5",
@@ -53,10 +56,18 @@
   "cordovaPlugins": [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "cordova-plugin-winstore-jscompat"
   ],
   "cordova": {
-    "platforms": [],
-    "plugins": {}
-  }
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-winstore-jscompat": {}
+    }
+  },
+  "app_id": "",
+  "integrations": {},
+  "type": "ionic1"
 }

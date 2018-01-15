@@ -44,7 +44,7 @@ angular.module('starter').controller('StatisticsCtrl', function($rootScope, $sco
                     }
                 ];
                 temp.expand = false; 
-                temp.Id = new Date().getTime();
+                temp.Id = new Date().getTime()/i;
                 $scope.groups.push(temp);
             }
         };
