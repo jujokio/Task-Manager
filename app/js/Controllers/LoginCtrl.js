@@ -27,17 +27,16 @@ angular.module('starter').controller('LoginCtrl', function($scope, $rootScope, $
                 "password":$scope.loginInfo.password,
                 "mac_address": $rootScope.cookie
             }
-            
-            Restangular.all("login").withHttpConfig().post(loginJSON).then(function(data) {
+            $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
+                $rootScope.loggedUser = angular.copy($scope.loginInfo);
+                $rootScope.activationFlags.isLoggedIn = true;
                 $scope.loginInfo= {};
                 console.log("login with:");
                 console.log(loginJSON.email);
+                
                 $state.go('tab.AddTask', {}, {
                     reload: true
                 });
-                
-            
-
             });
         };
 

@@ -21,6 +21,10 @@ Settings.debugIP = "192.168.1.241/";       //localHost ip
 //Settings.debugIP = "https://192.168.43.151/";    // Honor 6 ip
 Settings.apiURL = "";
 
+/* API COMMANDS */
+Settings.Post = "Post;"
+Settings.Get = "Get";
+
 /* COLORS */
 Settings.COLOR_OK = "#3695ff";
 Settings.COLOR_SEMI_OK = "#f8a700";

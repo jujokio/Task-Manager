@@ -4,7 +4,7 @@
     logout.png https://commons.wikimedia.org/wiki/File:Logout.svg
     
 */
-angular.module('starter').controller('AppCtrl', function($cordovaNetwork, $cordovaToast, $filter,$ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicPlatform, $ionicPopup, $q, Restangular, $rootScope, $scope, $state, $timeout, $window) {
+angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicPlatform, $ionicPopup, $q, Restangular, $rootScope, $scope, $state, $timeout, $window) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -73,45 +73,84 @@ angular.module('starter').controller('AppCtrl', function($cordovaNetwork, $cordo
     };
     */
 
-
-
-
-    //      Check internet connection
+        //      Platform ready
             /**
     * @ngdoc method
-    * @name checkConnection
+    * @name ready
     * @methodOf AppCtrl
     * @description
-    * Check device's internet connection.
-    * Toggle $rootScope.isOnline.value true/false.
+    *  When the device is ready
+    * Calls init()
     *  
-    * @returns {boolean} true if connection is available.
     */
-    $rootScope.checkConnection = function() {  
-        if ($rootScope.platform == Settings.PLATFORM_WEBVIEW){//browser
-            //$rootScope.isOnline.value = false;
-            //return false;
-            return true;
+    $ionicPlatform.ready(function() {
+        console.log("Welcome to TaskManager!");
+        var baseUrl = "http://ec2-18-196-36-12.eu-central-1.compute.amazonaws.com:5000/gm/s";
+        Restangular.setBaseUrl(baseUrl);
+        Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
+        if($rootScope.loggedUser != null){
+
         }
-        else if($rootScope.platform == Settings.PLATFORM_ANDROID || $rootScope.platform == Settings.PLATFORM_IOS){// android or ios
-            if($cordovaNetwork.isOnline()){
-                $rootScope.isOnline.value = true;
-                return true;
-            }else{//android or ios no connection
-                console.log("Internet connection is not ok!");
-                $rootScope.isOnline.value = false;
-                return false;
-            }
-        } else {// is windows phone
-            if($window.navigator.onLine){
-                return true;
-            }else{//windows no connection
-                console.log("Internet connection is not ok!");
-                $rootScope.isOnline.value = false;
-                return false;
-            }
+    });
+
+        //      Send API request
+            /**
+    * @ngdoc method
+    * @name askAPI
+    * @methodOf AppCtrl
+    * @description
+    * Send API requests
+    * Calls checkServerResponseStatus() if error
+    * Is deferred
+    *  
+    * @param {String} command API request method
+    * @param {String} apiURL Url for request
+    * @param {Object} payloadJSON JSON for request
+    * @returns {Object} server response
+    */
+    $rootScope.askAPI = function(command,apiUrl, payloadJSON) {
+        var deferred = $q.defer();
+        console.log("command: "+ command);
+        console.log("apiUrl: "+ apiURL);
+        console.log("payload: "+ JSON.stringify(payloadJSON));
+        
+        if(command == Settings.Post){
+            var startTime = new Date().getTime();
+            Restangular.all(apiUrl).post(payloadJSON).then(function(response) {
+                deferred.resolve(response);
+
+                },function(err){//Rest Post
+                    err.respTime = new Date().getTime() - startTime;
+                    $rootScope.checkServerResponseStatus(err).then(function(){
+                        deferred.reject(err);
+                    },function(err){                    
+                        $rootScope.logOut();
+                }); // rest Post
+            });
+        }else if(command == Settings.Get){
+            var startTime = new Date().getTime();
+            Restangular.one(apiUrl).get(payloadJSON).then(function(response) {
+                deferred.resolve(response);
+
+                },function(err){//Rest Get
+                    err.respTime = new Date().getTime() - startTime;
+                    $rootScope.checkServerResponseStatus(err).then(function(){
+                        deferred.reject(err);
+                    },function(err){                    
+                        $rootScope.logOut();
+                }); // rest Get
+            }); 
+        }else{
+            console.log("command: "+ command);
+            console.log("apiUrl: "+ apiURL);
+            console.log("payload: "+ JSON.stringify(payloadJSON));
+            deferred.resolve(false);
         }
+
+
+        return deferred.promise;
     };
+
     
 
 
@@ -131,7 +170,7 @@ angular.module('starter').controller('AppCtrl', function($cordovaNetwork, $cordo
     $rootScope.checkServerResponseStatus = function(response){
         var deferred = $q.defer();
         $rootScope.activationFlags.loading = false;
-        var message = $translate.instant('SERVER_MESSAGE');
+        var message = "Server Messsage: ";
         if($rootScope.checkConnection()){
             console.log("Network error: ");
             console.error(response);
@@ -219,6 +258,10 @@ angular.module('starter').controller('AppCtrl', function($cordovaNetwork, $cordo
 
     $rootScope.logOut = function(){
         console.log("log out");
+        var logOutJSON = {
+            "email":$rootScope.loggedUser.email,
+            "mac_address": $rootScope.cookie
+        }
         $state.go('Login', {}, {
             reload: true
         });

@@ -19,13 +19,14 @@ angular.module('starter').controller('NewUserCtrl', function($q, $scope, $rootSc
             var registerJSON = {
                 "student_name":$scope.userInfo.studentName,
                 "email":$scope.userInfo.email,
-                "student_number":$scope.userInfo.studentNumber,
+                "student_number":[$scope.userInfo.studentNumber],
                 "password":$scope.userInfo.password,
-                "phone_number":$scope.userInfo.studentName
+                "phone_number":[$scope.userInfo.phoneNumber]
             }
             /*
-            var baseUrl = "http://ec2-52-58-73-142.eu-central-1.compute.amazonaws.com:5000/";
-            Restangular.all("login").withHttpConfig().post(registerJSON).then(function(data) {
+            student_name,email,[student_number],password,[phone_number]
+            $rootScope.askAPI(Settings.Get, "create_user", registerJSON).then(function(response){
+            Restangular.all("create_user").withHttpConfig().post(registerJSON).then(function(data) {
                 */
                 $scope.userInfo = {};
                 console.log("register with:");
