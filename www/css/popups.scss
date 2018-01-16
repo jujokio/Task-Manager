@@ -5,7 +5,7 @@
     
     .popup {
         width: 80% !important;
-        border: 1px solid $vesitietofi-blue !important;
+        border: 1px solid $ApplicationTheme-blue !important;
         border-top-left-radius: 5px !important;
         border-top-right-radius: 5px !important;
         border-bottom-left-radius: 5px !important;
@@ -63,29 +63,29 @@
     .button.button-positive {
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $vesitietofi-button-background !important;
-        border-color: $vesitietofi-button-border !important;
+        background-color: $ApplicationTheme-button-background !important;
+        border-color: $ApplicationTheme-button-border !important;
     }
     
     .button-positive {
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $vesitietofi-button-background !important;
-        border-color : $vesitietofi-button-border !important;
+        background-color: $ApplicationTheme-button-background !important;
+        border-color : $ApplicationTheme-button-border !important;
     }
     
     .button-positive.activated {
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $vesitietofi-darkblue !important;
-        border-color: $vesitietofi-darkblue !important;
+        background-color: $ApplicationTheme-darkblue !important;
+        border-color: $ApplicationTheme-darkblue !important;
     }
 
     .button.button-negative {
         color: white;
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $vesitietofi-button-red !important;
+        background-color: $ApplicationTheme-button-red !important;
         border-color: red !important;
     }
     
@@ -156,22 +156,22 @@
     .button.button-positive {
         font-weight: bold !important;
         font-size: 0.8em !important;
-        background-color: $vesitietofi-button-background!important;
-        border-color: $vesitietofi-button-border !important;
+        background-color: $ApplicationTheme-button-background!important;
+        border-color: $ApplicationTheme-button-border !important;
     }
     
     .button-positive {
         font-weight: bold !important;
         font-size: 0.8em !important;
-        background-color: $vesitietofi-button-background!important;
-        border-color: $vesitietofi-button-border !important;
+        background-color: $ApplicationTheme-button-background!important;
+        border-color: $ApplicationTheme-button-border !important;
     }
     
     .button-positive.activated {
         font-weight: bold !important;
         font-size: 0.8em !important;
-        background-color: $vesitietofi-button-activated !important;
-        border-color: $vesitietofi-button-activated !important;
+        background-color: $ApplicationTheme-button-activated !important;
+        border-color: $ApplicationTheme-button-activated !important;
     }
 }
 
@@ -183,7 +183,7 @@ ion-modal-view ion-content {
     right: 0;
     bottom: 0;
     left: 0;
-    border: 1px solid $vesitietofi-blue;
+    border: 1px solid $ApplicationTheme-blue;
     position: relative;
     padding-bottom: 15px;
 }
@@ -243,7 +243,7 @@ ion-modal-view ion-content {
 }
 
 .ionic_datepicker_popup .selected_date {
-    background-color: $vesitietofi-darkblue !important;
+    background-color: $ApplicationTheme-darkblue !important;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -258,11 +258,11 @@ ion-modal-view ion-content {
 }
 
 .ionic_datepicker_popup .popup-body .selected_date_full {
-    background-color: $vesitietofi-darkblue !important;
+    background-color: $ApplicationTheme-darkblue !important;
 }
 
 .ionic_datepicker_popup .popup-buttons .button_set{
-    background-color: $vesitietofi-darkblue;
+    background-color: $ApplicationTheme-darkblue;
 }
 
 .ionic_datepicker_popup .popup-buttons .button_today{
