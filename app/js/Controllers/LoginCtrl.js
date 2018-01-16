@@ -13,37 +13,32 @@ angular.module('starter').controller('LoginCtrl', function($scope, $rootScope, $
   
         
         $scope.loginInfo= {};
-        $scope.loginInfo.password="d";
-        $scope.loginInfo.email="d";   
+   
              
 
         $scope.doLogin = function (){
             console.log("login");
             var time = new Date().getTime();
-            $scope.loginInfo.kex = Cookies.set('TaskManagerCookie', time, { expires: 2 });
+            
+            $rootScope.cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             
             var loginJSON = {
                 "email":$scope.loginInfo.email,
                 "password":$scope.loginInfo.password,
-                "mac_address":$scope.loginInfo.kex
+                "mac_address": $rootScope.cookie
             }
-            /*
-            var baseUrl = "http://ec2-52-58-73-142.eu-central-1.compute.amazonaws.com:5000/";
-            Restangular.setBaseUrl(baseUrl);
-            Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
+            
             Restangular.all("login").withHttpConfig().post(loginJSON).then(function(data) {
-                Restangular.setDefaultHeaders({'Authorization': 'Bearer ' +  data});
-                */
                 $scope.loginInfo= {};
                 console.log("login with:");
-                console.log(loginJSON);
+                console.log(loginJSON.email);
                 $state.go('tab.AddTask', {}, {
                     reload: true
                 });
                 
             
 
-            //});
+            });
         };
 
 

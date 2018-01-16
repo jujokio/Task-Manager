@@ -73,7 +73,22 @@ angular.module('starter').controller('AppCtrl', function($cordovaNetwork, $cordo
     };
     */
 
-
+        //      Platform ready
+            /**
+    * @ngdoc method
+    * @name ready
+    * @methodOf AppCtrl
+    * @description
+    *  When the device is ready
+    * Calls init()
+    *  
+    */
+    $ionicPlatform.ready(function() {
+        console.log("Welcome to TaskManager!");
+        var baseUrl = "http://ec2-18-196-36-12.eu-central-1.compute.amazonaws.com:5000/gm/s";
+        Restangular.setBaseUrl(baseUrl);
+        Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
+    });
 
 
     //      Check internet connection
