@@ -6,7 +6,7 @@
             </div>
             
             <div class="bar-header-divider-center">
-                <h4 class="bar-header-h4">LOG IN</h4>
+                <h4 class="bar-header-h4">Register</h4>
             </div>
 
             <div class="bar-header-divider-right">
@@ -22,25 +22,38 @@
             <div class="list-long">
 
                 <ion-item>
-                    <label class="label">Name<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentName"/></label>
+                    <label class="label">Name <span class="input-mandatory-asterix"> *</span>
+                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentName"/>
+                    </label>
                 
 
                
-                    <label class="label">Student number<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentNumber"/></label>
+                    <label class="label">Student number<span class="input-mandatory-asterix"> *</span>
+                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentNumber"/>
+                    </label>
                
 
-                    <label class="label">Email<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.email"/></label>
+                    <label class="label">Email<span class="input-mandatory-asterix"> *</span>
+                        <input class=" item input-label" type="email" ng-disabled="loginActive" ng-model="userInfo.email"/>
+                    </label>
                
 
               
-                    <label class="label">Phone number<input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.phoneNumber"/></label>
+                    <label class="label">Phone number
+                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.phoneNumber"/>
+                    </label>
                 
 
               
-                    <label class="label">Password<input class="input-label" type="password" ng-disabled="loginActive"  ng-model="userInfo.password"/></label>
+                    <label class="label">Password<span class="input-mandatory-asterix"> *</span>
+                        <input class="input-label" type="password" ng-disabled="loginActive"  ng-model="userInfo.password"/>
+                    </label>
                
                
-                    <label class="label">Repeat password<input class=" item input-label" type="password" ng-disabled="loginActive" ng-model="userInfo.confirmPassword"/></label>
+                    <label class="label">Confirm password<span class="input-mandatory-asterix"> *</span>
+                        <input class=" item input-label" type="password" ng-disabled="loginActive" ng-model="userInfo.confirmPassword"/>
+                    </label>
+                    
                 </ion-item>
 
 

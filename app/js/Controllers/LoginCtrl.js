@@ -19,12 +19,13 @@ angular.module('starter').controller('LoginCtrl', function($scope, $rootScope, $
 
         $scope.doLogin = function (){
             console.log("login");
+            var time = new Date().getTime();
+            $scope.loginInfo.kex = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             
             var loginJSON = {
-                "student_name":$scope.loginInfo.studentName,
                 "email":$scope.loginInfo.email,
                 "password":$scope.loginInfo.password,
-                "mac_address":$scope.loginInfo.mac
+                "mac_address":$scope.loginInfo.kex
             }
             /*
             var baseUrl = "http://ec2-52-58-73-142.eu-central-1.compute.amazonaws.com:5000/";

@@ -16,28 +16,24 @@ angular.module('starter').controller('NewUserCtrl', function($q, $scope, $rootSc
              
 
         $scope.doRegister = function (){
-            var loginJSON = {
+            var registerJSON = {
                 "student_name":$scope.userInfo.studentName,
                 "email":$scope.userInfo.email,
                 "student_number":$scope.userInfo.studentNumber,
                 "password":$scope.userInfo.password,
                 "phone_number":$scope.userInfo.studentName
             }
+            /*
             var baseUrl = "http://ec2-52-58-73-142.eu-central-1.compute.amazonaws.com:5000/";
-            Restangular.setBaseUrl(baseUrl);
-            Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
-            Restangular.all("login").withHttpConfig().post(loginJSON).then(function(data) {
-                Restangular.setDefaultHeaders({'Authorization': 'Bearer ' +  data});
-                console.log("login with:");
-                console.log($scope.userInfo);
+            Restangular.all("login").withHttpConfig().post(registerJSON).then(function(data) {
+                */
+                $scope.userInfo = {};
+                console.log("register with:");
+                console.log(registerJSON);
                 $scope.userInfo= {};
                 $state.go('tab.AddTask', {}, {
                     reload: true
                 });
-                
-
-
-            });
         };
 
 

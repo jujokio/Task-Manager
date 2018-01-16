@@ -489,7 +489,7 @@ div {
     width: fill-available;
 }
 
-input[type="text"],input[type="textarea"],input[type="number"],input[type="password"],input[type="date"],input[type="datetime-local"],input[type="radio"],input[type="time"],input[type="toggle"],select{
+input[type="text"],input[type="textarea"],input[type="number"],input[type="password"],input[type="date"],input[type="datetime-local"],input[type="radio"],input[type="time"],input[type="toggle"],input[type="email"],select{
     text-overflow: clip;
     width: 85%;
     padding-top: 5px;
@@ -530,6 +530,12 @@ input[disabled] {
     padding-top: 0.5*$fontSize;
     padding-bottom: 0.5*$fontSize;
     font-size: $fontSize;
+}
+
+.input-mandatory-asterix {
+    color: #FFC107;
+    font-weight: 700;
+    font-size: 0.7*$fontSize;
 }
 
 .item{

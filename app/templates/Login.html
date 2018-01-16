@@ -29,16 +29,14 @@
                     <label class="label">Password<input class="input-label" type="password" ng-disabled="loginActive"  ng-model="loginInfo.password"/></label>
                 </ion-item>
 
-             
-                <u class="item-interact" ng-click="goToNewUser()">Create new user</u>
-                
-
                 <label class="item">
                     <button class="button button-block button-positive button-noleft button-positive-list" id="loginButton" ng-if="loginInfo.email && loginInfo.password" ng-click="doLogin()">
                         <i class="icon ion-log-in"></i>
                         LOG IN
                     </button>
                 </label>
+
+                <u class="item-interact" ng-click="goToNewUser()">Register</u>
                 
             </div>  
         </ion-list>
