@@ -108,21 +108,21 @@
         .state('Login', {
             url: '/Login',
             templateUrl: 'templates/Login.html',
-            controller: 'LoginCtrl'
+            controller: 'AppCtrl'
         })
 
         .state('NewUser', {
             url: '/NewUser',
             templateUrl: 'templates/NewUser.html',
-            controller: 'NewUserCtrl'
+            controller: 'AppCtrl'
         })
 
         // setup an abstract state for the tabs directive
         .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'templates/tabs.html',
-        controller: 'AppCtrl'
+            url: '/tab',
+            abstract: true,
+            templateUrl: 'templates/tabs.html',
+            controller: 'AppCtrl'
         })
 
         // Each tab has its own nav history stack:

@@ -20,53 +20,52 @@
 
         <ion-list class="item-list">
             <div class="list-long">
-
-                <ion-item>
-                    <label class="label">Name <span class="input-mandatory-asterix"> *</span>
-                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentName"/>
-                    </label>
-                
-
-               
-                    <label class="label">Student number<span class="input-mandatory-asterix"> *</span>
-                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentNumber"/>
-                    </label>
-               
-
-                    <label class="label">Email<span class="input-mandatory-asterix"> *</span>
-                        <input class=" item input-label" type="email" ng-disabled="loginActive" ng-model="userInfo.email"/>
-                    </label>
-               
-
-              
-                    <label class="label">Phone number
-                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.phoneNumber"/>
-                    </label>
-                
-
-              
-                    <label class="label">Password<span class="input-mandatory-asterix"> *</span>
-                        <input class="input-label" type="password" ng-disabled="loginActive"  ng-model="userInfo.password"/>
-                    </label>
-               
-               
-                    <label class="label">Confirm password<span class="input-mandatory-asterix"> *</span>
-                        <input class=" item input-label" type="password" ng-disabled="loginActive" ng-model="userInfo.confirmPassword"/>
-                    </label>
+                <form>
+                    <ion-item>
+                        <label class="label">Name <span class="input-mandatory-asterix"> *</span>
+                            <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentName"/>
+                        </label>
                     
-                </ion-item>
 
+                
+                        <label class="label">Student number<span class="input-mandatory-asterix"> *</span>
+                            <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.studentNumber"/>
+                        </label>
+                
 
+                        <label class="label">Email<span class="input-mandatory-asterix"> *</span>
+                            <input class=" item input-label" type="email" ng-disabled="loginActive" ng-model="userInfo.email"/>
+                        </label>
+                
+
+                
+                        <label class="label">Phone number
+                            <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="userInfo.phoneNumber"/>
+                        </label>
+                    
+
+                
+                        <label class="label">Password<span class="input-mandatory-asterix"> *</span>
+                            <input class="input-label" type="password" ng-disabled="loginActive"  ng-model="userInfo.password"/>
+                        </label>
+                
+                
+                        <label class="label">Confirm password<span class="input-mandatory-asterix"> *</span>
+                            <input class=" item input-label" type="password" ng-disabled="loginActive" ng-model="userInfo.confirmPassword"/>
+                        </label>
+                    
+                    </ion-item>
+                </form>
 
                 <label class="item">
-                    <button ng-if="userInfo.password === userInfo.confirmPassword && userInfo.password!=null " class="button button-block button-positive button-noleft button-positive-list" ng-click="createUser()">
+                    <button  type="submit" ng-disabled="activationFlags.loading" ng-if="userInfo.password === userInfo.confirmPassword && userInfo.password!=null " class="button button-block button-positive button-noleft button-positive-list" ng-click="doRegister()">
                         <i class="icon ion-person-add"></i>
                         Create new user
                     </button>
                 </label>
 
                 <label class="item">
-                    <button class="button button-block button-close button-noleft button-positive-list" ng-click="goToLogin()">
+                    <button class="button button-block button-close button-noleft button-positive-list" ng-click="goToState('Login')">
                         <i class="icon ion-arrow-return-left"></i>
                         Back
                     </button>

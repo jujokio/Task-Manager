@@ -17,6 +17,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     $rootScope.isOnline = {}; // offline?
     $rootScope.profileSettings = {}; // store user settings, names...
     $rootScope.activationFlags = {}; // activationFlags. flags flags flags...
+    $scope.loginInfo= {};
+    $scope.userInfo = {};
     
     /* VARIABLES */
     $rootScope.isOnline.value = true; // internet connection flag controlled from checkConnection()
@@ -28,6 +30,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     $rootScope.activationFlags.loading = false; // Loading active flag. true when anything is loading. restricts other from loading.
     $rootScope.activationFlags.isLoggedIn = false; // Log in success flag. True when logged in.
     $rootScope.activationFlags.tabInit = false;
+
+ 
 
     $rootScope.SidemenuList = [
         {"value":"Login", "enum":0},
@@ -43,27 +47,22 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         $rootScope.stateChanged.Flag = true;
         switch (selectedState) {
             case 0:
-                $state.go('tab.login', {}, {
-                    reload: true
-                });
+            $rootScope.goToState('Login');
+
                 return;
                 
             case 1:
-                $state.go('tab.AddTask', {}, {
-                    reload: true
-                });
+            $rootScope.goToState('tab.AddTask');
+
                 return;
 
             case 2:
-                $state.go('tab.ManageGroup', {}, {
-                    reload: true
-                });
+                $rootScope.goToState('tab.ManageGroup');
                 return; 
 
             case 3:
-                $state.go('tab.Statistics', {}, {
-                    reload: true
-                });
+                $rootScope.goToState('tab.Statistics');
+                
                 return;
 
             default:
@@ -73,8 +72,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     };
     */
 
-        //      Platform ready
-            /**
+    /**
     * @ngdoc method
     * @name ready
     * @methodOf AppCtrl
@@ -85,16 +83,13 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $ionicPlatform.ready(function() {
         console.log("Welcome to TaskManager!");
-        var baseUrl = "http://ec2-18-196-36-12.eu-central-1.compute.amazonaws.com:5000/gm/s";
+        var baseUrl = "http://ec2-18-196-36-12.eu-central-1.compute.amazonaws.com:5000/gm/";
         Restangular.setBaseUrl(baseUrl);
         Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
-        if($rootScope.loggedUser != null){
 
-        }
     });
 
-        //      Send API request
-            /**
+    /**
     * @ngdoc method
     * @name askAPI
     * @methodOf AppCtrl
@@ -104,14 +99,15 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     * Is deferred
     *  
     * @param {String} command API request method
-    * @param {String} apiURL Url for request
+    * @param {String} apiUrl Url for request
     * @param {Object} payloadJSON JSON for request
     * @returns {Object} server response
     */
     $rootScope.askAPI = function(command,apiUrl, payloadJSON) {
         var deferred = $q.defer();
+
         console.log("command: "+ command);
-        console.log("apiUrl: "+ apiURL);
+        console.log("apiUrl: "+ apiUrl);
         console.log("payload: "+ JSON.stringify(payloadJSON));
         
         if(command == Settings.Post){
@@ -122,9 +118,9 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                 },function(err){//Rest Post
                     err.respTime = new Date().getTime() - startTime;
                     $rootScope.checkServerResponseStatus(err).then(function(){
-                        deferred.reject(err);
-                    },function(err){                    
-                        $rootScope.logOut();
+                        deferred.resolve(null);
+                    },function(err){   
+                        $rootScope.doLogOut();
                 }); // rest Post
             });
         }else if(command == Settings.Get){
@@ -135,17 +131,18 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                 },function(err){//Rest Get
                     err.respTime = new Date().getTime() - startTime;
                     $rootScope.checkServerResponseStatus(err).then(function(){
-                        deferred.reject(err);
-                    },function(err){                    
-                        $rootScope.logOut();
+                        deferred.resolve(null);
+                    },function(err){
+                        $rootScope.doLogOut();
                 }); // rest Get
             }); 
         }else{
             console.log("command: "+ command);
-            console.log("apiUrl: "+ apiURL);
+            console.log("apiUrl: "+ apiUrl);
             console.log("payload: "+ JSON.stringify(payloadJSON));
-            deferred.resolve(false);
+            deferred.resolve(null);
         }
+        
 
 
         return deferred.promise;
@@ -154,8 +151,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     
 
 
-        //      Check server response status (server response)
-            /**
+    /**
     * @ngdoc method
     * @name checkServerResponseStatus
     * @methodOf AppCtrl
@@ -170,78 +166,78 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     $rootScope.checkServerResponseStatus = function(response){
         var deferred = $q.defer();
         $rootScope.activationFlags.loading = false;
+        $rootScope.activationFlags.popupOpen = true;
         var message = "Server Messsage: ";
-        if($rootScope.checkConnection()){
-            console.log("Network error: ");
-            console.error(response);
-            //unauthorized?
-            if(response.data != null && response.data.Message != null){
-                if(response.data.ExceptionType == "System.UnauthorizedAccessException" || response.data.ExceptionMessage == "Attempted to perform an unauthorized operation." || ($rootScope.activationFlags.isLoggedIn && response.data.Message == "An error has occurred." && response.status == 500)){
-                    message = $translate.instant('LOG_OUT_WITH_OTHER_DEVICES');
-                    $rootScope.hideWait();
-                    deferred.reject(false);
-                
-                }else{    
-                    message += response.data.Message;
-                }
-            //Timeout?
-            }else if (response != null && response.config != null && response.config.timeout != null && response.respTime >= response.config.timeout) {
-                   message += $translate.instant('ERROR_TIMEOUT');
-                   response.TIMEOUT=true;
-            //No response at all?
-            }else{
-                console.log("No message detected");
-                deferred.resolve(true);
-            }
 
-            // check the status
-
-            if((response == null || response.status == -1 || response.data == null) && !response.TIMEOUT){
-                console.log("Response is null");
-                message +="<br/>"+"<br/>"+ "Server is not responding. Please check the internet connection.";
-
-            }else if(response.status == 200){
-                deferred.resolve(true);
-
-            }else if(response.status == 400){
-                message +="<br/>"+"<br/>";
-
-            }else if(response.status == 401){
-                message ="<br/>"+"<br/>"+ $translate.instant('WRONG_PASSWORD');
+        console.log("Network error: ");
+        console.error(response);
+        //unauthorized?
+        if(response.data != null && response.data.Message != null){
+            if(response.data.ExceptionType == "System.UnauthorizedAccessException" || response.data.ExceptionMessage == "Attempted to perform an unauthorized operation." || ($rootScope.activationFlags.isLoggedIn && response.data.Message == "An error has occurred." && response.status == 500)){
+                message = "Log out with other devices please."
                 $rootScope.hideWait();
                 deferred.reject(false);
-
-            }else if(response.status == 403){
-                message +="<br/>"+"<br/>"+ "This is restricted area. Please leave imediatly";
-
-            }else if(response.status == 404){
-                message +="<br/>"+"<br/>"+ "Error 404. Page not found";
-
-            }else if(response.status == 500){
-                if(!$rootScope.activationFlags.isLoggedIn && $rootScope.usernameLocked.value>5){
-                    message += $translate.instant('USERNAME_LOCKED');
-                }
-                console.log(" 500 (Internal server error)");
-            }else{
-                console.log($translate.instant('SERVER_STATUS')+ " " +response.status);
+            
+            }else{    
+                message += response.data.Message;
             }
-
-        }else{// checkConnection false
-            message = $translate.instant('NETWORK_CONNECTION_FAILED');
+        //Timeout?
+        }else if (response != null && response.config != null && response.config.timeout != null && response.respTime >= response.config.timeout) {
+                message += "Connection timed out";
+                response.TIMEOUT=true;
+        //No response at all?
+        }else{
+            console.log("No message detected");
+            deferred.resolve(true);
         }
+
+        // check the status
+
+        if((response == null || response.status == -1 || response.data == null) && !response.TIMEOUT){
+            console.log("Response is null");
+            message +="<br/>"+"<br/>"+ "Server is not responding. Please check the internet connection.";
+
+        }else if(response.status == 200){
+            deferred.resolve(true);
+
+        }else if(response.status == 400){
+            message +="<br/>"+"<br/>";
+
+        }else if(response.status == 401){
+            message ="<br/>"+"<br/>"+ "Wrong password, please try again.";
+            $rootScope.hideWait();
+            deferred.reject(false);
+
+        }else if(response.status == 403){
+            message +="<br/>"+"<br/>"+ "This is restricted area. Please leave imediatly";
+
+        }else if(response.status == 404){
+            message +="<br/>"+"<br/>"+ "Error 404. Page not found";
+
+        }else if(response.status == 500){
+            if(!$rootScope.activationFlags.isLoggedIn && $rootScope.usernameLocked.value>5){
+                message += "Username is locked! Please contact your friendly neighborhood Admin.";
+            }
+            console.log(" 500 (Internal server error)");
+        }else{
+            console.log("Server status:" + response.status);
+        }
+
+        
         if(!$rootScope.activationFlags.sendOffline){
             $rootScope.hideWait();
             var warn = $ionicPopup.show({
                         template: message,
-                        title: $translate.instant('SERVER_ERROR'),
-                        subTitle: $translate.instant('SERVER_STATUS')+" "+ response.status,
+                        title: "Server error",
+                        subTitle: "Server status: " + response.status,
                         scope: $rootScope,
                         cssClass: 'alert-normal',
                         buttons: [{
-                            text: $translate.instant('OK'),
+                            text: 'OK',
                             type: 'button button-positive',
                             onTap: function() { 
                                     warn.close();
+                                    $rootScope.activationFlags.popupOpen = false;
                                     deferred.resolve(message);
                                     
                             }
@@ -256,22 +252,131 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     };
 
 
-    $rootScope.logOut = function(){
-        console.log("log out");
-        var logOutJSON = {
-            "email":$rootScope.loggedUser.email,
-            "mac_address": $rootScope.cookie
+      
+    /**
+    * @ngdoc method
+    * @name doLogin
+    * @methodOf AppCtrl
+    * @description
+    * do log in
+    * Calls askAPI(), goToState()
+    *  
+    */
+    $rootScope.doLogin = function (){
+        if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+            $rootScope.showWait('Loading...');
+            $rootScope.activationFlags.loading = true;
+            console.log("login");
+            var time = new Date().getTime();
+            
+            $rootScope.cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
+            console.log("cookie");
+            var loginJSON = {
+                "email":$scope.loginInfo.email,
+                "password":$scope.loginInfo.password,
+                "mac_address": $rootScope.cookie
+            }
+            console.log("ask");
+            $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
+                if(response != null){
+                    $rootScope.loggedUser = angular.copy($scope.loginInfo);
+                    $rootScope.activationFlags.isLoggedIn = true;
+                    $scope.loginInfo= {};
+                    console.log("login with:");
+                    console.log(loginJSON.email);
+                    $rootScope.activationFlags.loading = false;
+                    $rootScope.hideWait();
+                    $rootScope.goToState('tab.AddTask');
+                }else{
+                    $rootScope.activationFlags.loading = false;
+                    $rootScope.hideWait();
+                }
+            });
+        }else{
+            console.log("I'm busy as a bee!");
         }
-        $state.go('Login', {}, {
+    };
+
+
+
+    /**
+    * @ngdoc method
+    * @name doLogOut
+    * @methodOf AppCtrl
+    * @description
+    * Do log out
+    * calls askAPI() goToState()
+    * Is deferred
+    *  
+    */
+    $rootScope.doLogOut = function(){
+        if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+            console.log("log out");
+            var logOutJSON = {
+                "email":$rootScope.loggedUser.email,
+                "mac_address": $rootScope.cookie
+            }
+            $rootScope.goToState('Login');
+        }else{
+            console.log("I'm busy as a bee!");
+        }
+    };
+
+
+
+    /**
+    * @ngdoc method
+    * @name doRegister
+    * @methodOf AppCtrl
+    * @description
+    * Register new user
+    * Calls askAPI()
+    *  
+    */
+    $rootScope.doRegister = function (){
+        if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+            var registerJSON = {
+                "student_name":$scope.userInfo.studentName,
+                "email":$scope.userInfo.email,
+                "student_number":[$scope.userInfo.studentNumber],
+                "password":$scope.userInfo.password,
+                "phone_number":[$scope.userInfo.phoneNumber]
+            }
+            /*
+            student_name,email,[student_number],password,[phone_number]
+            $rootScope.askAPI(Settings.Get, "create_user", registerJSON).then(function(response){
+            Restangular.all("create_user").withHttpConfig().post(registerJSON).then(function(data) {
+                */
+                console.log("register with:");
+                console.log(registerJSON);
+                $scope.userInfo= {};
+                $rootScope.goToState('tab.AddTask');
+            }else{
+                console.log("I'm busy as a bee!");
+            }
+    };
+
+
+
+    /**
+    * @ngdoc method
+    * @name goToState
+    * @methodOf AppCtrl
+    * @description
+    * Change state
+    *  
+    * @param {String} stateName State name as described in app.js
+    */
+    $rootScope.goToState = function (stateName){
+        console.log("go to: " + stateName);
+        $state.go(stateName, {}, {
             reload: true
         });
     };
 
 
 
-
-    //      Hide wait
-            /**
+    /**
     * @ngdoc method
     * @name hideWait
     * @methodOf AppCtrl
@@ -290,19 +395,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        //      Show Deferred alert (title, details)
-            /**
+    /**
     * @ngdoc method
     * @name showDeferredAlert
     * @methodOf AppCtrl
@@ -344,8 +437,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
 
 
 
-        //      Show Deferred Popup (title, details)
-            /**
+    /**
     * @ngdoc method
     * @name showDeferredPopup
     * @methodOf AppCtrl
@@ -395,8 +487,9 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         return deferred.promise;
     };
 
-        //      Show wait
-            /**
+
+
+    /**
     * @ngdoc method
     * @name showWait
     * @methodOf AppCtrl
@@ -418,5 +511,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             delay: Settings.LOADING_SPINNER_DELAY
         });
     };
+
+
+
   });
   

@@ -22,7 +22,7 @@ Settings.debugIP = "192.168.1.241/";       //localHost ip
 Settings.apiURL = "";
 
 /* API COMMANDS */
-Settings.Post = "Post;"
+Settings.Post = "Post";
 Settings.Get = "Get";
 
 /* COLORS */
