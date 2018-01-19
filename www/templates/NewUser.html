@@ -55,21 +55,22 @@
                         </label>
                     
                     </ion-item>
+               
+
+                    <label class="item">
+                        <button  type="submit" ng-disabled="activationFlags.loading" ng-if="validateRegister()" class="button button-block button-positive button-noleft button-positive-list" ng-click="doRegister()">
+                            <i class="icon ion-person-add"></i>
+                            Create new user
+                        </button>
+                    </label>
+
+                    <label class="item">
+                        <button class="button button-block button-close button-noleft button-positive-list" ng-click="goToState('Login')">
+                            <i class="icon ion-arrow-return-left"></i>
+                            Back
+                        </button>
+                    </label>
                 </form>
-
-                <label class="item">
-                    <button  type="submit" ng-disabled="activationFlags.loading" ng-if="userInfo.password === userInfo.confirmPassword && userInfo.password!=null " class="button button-block button-positive button-noleft button-positive-list" ng-click="doRegister()">
-                        <i class="icon ion-person-add"></i>
-                        Create new user
-                    </button>
-                </label>
-
-                <label class="item">
-                    <button class="button button-block button-close button-noleft button-positive-list" ng-click="goToState('Login')">
-                        <i class="icon ion-arrow-return-left"></i>
-                        Back
-                    </button>
-                </label>
                 
             </div>  
         </ion-list>

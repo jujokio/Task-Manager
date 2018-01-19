@@ -264,7 +264,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.doLogin = function (){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
-            $rootScope.showWait('Loading...');
+            $rootScope.showWait('Logging in...');
             $rootScope.activationFlags.loading = true;
             console.log("login");
             var time = new Date().getTime();
@@ -311,12 +311,16 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.doLogOut = function(){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
-            console.log("log out");
+            $rootScope.showWait('Logging out...');
             var logOutJSON = {
                 "email":$rootScope.loggedUser.email,
                 "mac_address": $rootScope.cookie
             }
-            $rootScope.goToState('Login');
+            $rootScope.askAPI(Settings.Post, "logout", logOutJSON).then(function(response){
+                $rootScope.hideWait();
+                $rootScope.activationFlags.loading = false;
+                $rootScope.goToState('Login');
+            });
         }else{
             console.log("I'm busy as a bee!");
         }
@@ -335,6 +339,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.doRegister = function (){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+            $rootScope.showWait('Registering...');
+            $rootScope.activationFlags.loading = true;
             var registerJSON = {
                 "student_name":$scope.userInfo.studentName,
                 "email":$scope.userInfo.email,
@@ -342,18 +348,17 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                 "password":$scope.userInfo.password,
                 "phone_number":[$scope.userInfo.phoneNumber]
             }
-            /*
-            student_name,email,[student_number],password,[phone_number]
-            $rootScope.askAPI(Settings.Get, "create_user", registerJSON).then(function(response){
-            Restangular.all("create_user").withHttpConfig().post(registerJSON).then(function(data) {
-                */
+            $rootScope.askAPI(Settings.Post, "create_user", registerJSON).then(function(response){
                 console.log("register with:");
                 console.log(registerJSON);
                 $scope.userInfo= {};
-                $rootScope.goToState('tab.AddTask');
-            }else{
-                console.log("I'm busy as a bee!");
-            }
+                $rootScope.hideWait();
+                $rootScope.activationFlags.loading = false;
+                $rootScope.goToState('Login');
+            });
+        }else{
+            console.log("I'm busy as a bee!");
+        }
     };
 
 
@@ -513,6 +518,29 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     };
 
 
+
+    /**
+    * @ngdoc method
+    * @name validateRegister
+    * @methodOf AppCtrl
+    * @description
+    * is the registration JSON valid
+    * 
+    * @returns {boolean} true/false
+    */
+    $rootScope.validateRegister = function() {
+       var valid = false;
+       if($scope.userInfo){
+            if($scope.userInfo.email != null && $scope.userInfo.studentName != null && $scope.userInfo.studentNumber != null){
+                if($scope.userInfo.password != null && $scope.userInfo.confirmPassword != null){
+                    if($scope.userInfo.password.toString().length>=5 && $scope.userInfo.password != "" && $scope.userInfo.password.toString() == $scope.userInfo.confirmPassword.toString()){
+                        valid = true;
+                    }
+                }
+            }
+       }
+       return valid;
+    };
 
   });
   
