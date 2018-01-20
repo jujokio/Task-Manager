@@ -12,65 +12,9 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-  
-    /* OBJECTS */
-    $rootScope.isOnline = {}; // offline?
-    $rootScope.profileSettings = {}; // store user settings, names...
-    $rootScope.activationFlags = {}; // activationFlags. flags flags flags...
-    $scope.loginInfo= {};
-    $scope.userInfo = {};
-    
-    /* VARIABLES */
-    $rootScope.isOnline.value = true; // internet connection flag controlled from checkConnection()
-    $rootScope.profileSettings.Timeout = 30000; // Timeout value in ms
 
-    /* ACTIVATE FLAGS */
-    $rootScope.activationFlags.popupOpen = false; // Popup active flag. True when sending any popup is open.
-    $rootScope.activationFlags.logoutActive = false; // logOut active flag.
-    $rootScope.activationFlags.loading = false; // Loading active flag. true when anything is loading. restricts other from loading.
-    $rootScope.activationFlags.isLoggedIn = false; // Log in success flag. True when logged in.
-    $rootScope.activationFlags.tabInit = false;
 
- 
-
-    $rootScope.SidemenuList = [
-        {"value":"Login", "enum":0},
-        {"value":"Add task", "enum":1},
-        {"value":"Manage group", "enum":2},
-        {"value":"Statistics", "enum":3},   
-    ];
- 
-    /*
-    NO NEED FOR THIS
-    $scope.goToSidemenu = function (selectedState){
-        console.log(selectedState);
-        $rootScope.stateChanged.Flag = true;
-        switch (selectedState) {
-            case 0:
-            $rootScope.goToState('Login');
-
-                return;
-                
-            case 1:
-            $rootScope.goToState('tab.AddTask');
-
-                return;
-
-            case 2:
-                $rootScope.goToState('tab.ManageGroup');
-                return; 
-
-            case 3:
-                $rootScope.goToState('tab.Statistics');
-                
-                return;
-
-            default:
-            return;
-        }
-
-    };
-    */
+   
 
     /**
     * @ngdoc method
@@ -82,12 +26,43 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     *  
     */
     $ionicPlatform.ready(function() {
-        console.log("Welcome to TaskManager!");
-        var baseUrl = "http://ec2-18-196-36-12.eu-central-1.compute.amazonaws.com:5000/gm/";
-        Restangular.setBaseUrl(baseUrl);
-        Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
-
+        if(!$rootScope.activationFlags){
+            console.log("RESET!");
+            $rootScope.isOnline = {}; // offline?
+            $rootScope.profileSettings = {}; // store user settings, names...
+            $rootScope.activationFlags = {}; // activationFlags. flags flags flags...
+            $rootScope.userInfo = {}; // store create_user request json.
+            $rootScope.groupInfo = {}; // store create_group request json.
+            $rootScope.allGroups = {}; // store fetch_group request's respone.
+            $rootScope.expand = {}; // expandable content
+            
+            /* VARIABLES */
+            $rootScope.isOnline.value = true; // internet connection flag controlled from checkConnection()
+            $rootScope.profileSettings.Timeout = 30000; // Timeout value in ms
+        
+            /* ACTIVATE FLAGS */
+            $rootScope.activationFlags.popupOpen = false; // Popup active flag. True when sending any popup is open.
+            $rootScope.activationFlags.logoutActive = false; // logOut active flag.
+            $rootScope.activationFlags.loading = false; // Loading active flag. true when anything is loading. restricts other from loading.
+            $rootScope.activationFlags.isLoggedIn = false; // Log in success flag. True when logged in.
+            $rootScope.activationFlags.tabInit = false;
+        
+         
+        
+            $rootScope.SidemenuList = [
+                {"value":"Login", "enum":0},
+                {"value":"Add task", "enum":1},
+                {"value":"Manage group", "enum":2},
+                {"value":"Statistics", "enum":3},   
+            ];
+            console.log("Welcome to TaskManager!");
+            var baseUrl = "http://ec2-18-196-36-12.eu-central-1.compute.amazonaws.com:5000/gm/";
+            Restangular.setBaseUrl(baseUrl);
+            Restangular.setDefaultHeaders({'Content-Type': 'application/json'});
+        }
     });
+
+
 
     /**
     * @ngdoc method
@@ -105,11 +80,6 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.askAPI = function(command,apiUrl, payloadJSON) {
         var deferred = $q.defer();
-
-        console.log("command: "+ command);
-        console.log("apiUrl: "+ apiUrl);
-        console.log("payload: "+ JSON.stringify(payloadJSON));
-        
         if(command == Settings.Post){
             var startTime = new Date().getTime();
             Restangular.all(apiUrl).post(payloadJSON).then(function(response) {
@@ -172,14 +142,14 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         console.log("Network error: ");
         console.error(response);
         //unauthorized?
-        if(response.data != null && response.data.Message != null){
-            if(response.data.ExceptionType == "System.UnauthorizedAccessException" || response.data.ExceptionMessage == "Attempted to perform an unauthorized operation." || ($rootScope.activationFlags.isLoggedIn && response.data.Message == "An error has occurred." && response.status == 500)){
+        if(response.data != null && response.data.message != null){
+            if(response.data.ExceptionType == "System.UnauthorizedAccessException" || response.data.ExceptionMessage == "Attempted to perform an unauthorized operation." || ($rootScope.activationFlags.isLoggedIn && response.data.message == "An error has occurred." && response.status == 500)){
                 message = "Log out with other devices please."
                 $rootScope.hideWait();
                 deferred.reject(false);
             
             }else{    
-                message += response.data.Message;
+                message += response.data.message;
             }
         //Timeout?
         }else if (response != null && response.config != null && response.config.timeout != null && response.respTime >= response.config.timeout) {
@@ -214,11 +184,6 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         }else if(response.status == 404){
             message +="<br/>"+"<br/>"+ "Error 404. Page not found";
 
-        }else if(response.status == 500){
-            if(!$rootScope.activationFlags.isLoggedIn && $rootScope.usernameLocked.value>5){
-                message += "Username is locked! Please contact your friendly neighborhood Admin.";
-            }
-            console.log(" 500 (Internal server error)");
         }else{
             console.log("Server status:" + response.status);
         }
@@ -252,7 +217,79 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     };
 
 
-      
+
+    /**
+    * @ngdoc method
+    * @name doCreateGroup
+    * @methodOf AppCtrl
+    * @description
+    * Join in one group
+    * Calls askAPI(), goToState()
+    *  
+    */
+    $rootScope.doCreateGroup = function (){
+        if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+            $rootScope.showWait('Creating your new group...');
+            $rootScope.activationFlags.loading = true;
+            var time = new Date().getTime();
+            var createJSON = {
+                "email":$rootScope.profileSettings.email,
+                "group_name": $rootScope.groupInfo.group_name,
+                "group_describtion": $rootScope.groupInfo.group_description
+            };
+            $rootScope.askAPI(Settings.Post, "create_group", createJSON).then(function(response){
+                if(response != null){
+                    $rootScope.activationFlags.loading = false;
+                    $rootScope.groupInfo = {};
+                    $rootScope.hideWait();
+                    $rootScope.goToState('tab.AddTask');
+                }else{
+                    $rootScope.activationFlags.loading = false;
+                    $rootScope.hideWait();
+                }
+            });
+        }else{
+            console.log("I'm busy as a bee!");
+        }
+    };
+
+    /**
+    * @ngdoc method
+    * @name doJoinGroup
+    * @methodOf AppCtrl
+    * @description
+    * Join in one group
+    * Calls askAPI(), goToState()
+    *  
+    * @param {String} groupID ID of the group in question
+    */
+    $rootScope.doJoinGroup = function (groupID){
+        if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+            $rootScope.showWait('Joining...');
+            $rootScope.activationFlags.loading = true;
+            var time = new Date().getTime();
+            var joinJSON = {
+                "email":$rootScope.profileSettings.email,
+                "group_id":groupID                
+            };
+            $rootScope.askAPI(Settings.Post, "join_group", joinJSON).then(function(response){
+                if(response != null){
+                    console.log(response);
+                    $rootScope.activationFlags.loading = false;
+                    $rootScope.hideWait();
+                   
+                }else{
+                    $rootScope.activationFlags.loading = false;
+                    $rootScope.hideWait();
+                }
+            });
+        }else{
+            console.log("I'm busy as a bee!");
+        }
+    };   
+
+
+
     /**
     * @ngdoc method
     * @name doLogin
@@ -260,33 +297,37 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     * @description
     * do log in
     * Calls askAPI(), goToState()
+    * If group Id is null, next state is 'joinGroup'.
     *  
     */
     $rootScope.doLogin = function (){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Logging in...');
             $rootScope.activationFlags.loading = true;
-            console.log("login");
             var time = new Date().getTime();
-            
-            $rootScope.cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
-            console.log("cookie");
+            var cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             var loginJSON = {
-                "email":$scope.loginInfo.email,
-                "password":$scope.loginInfo.password,
-                "mac_address": $rootScope.cookie
+                "email":$rootScope.profileSettings.email,
+                "password":$rootScope.profileSettings.password,
+                "mac_address": cookie
             }
-            console.log("ask");
+            console.log("login json:");
+            console.log(loginJSON);
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
                 if(response != null){
-                    $rootScope.loggedUser = angular.copy($scope.loginInfo);
+
+                    $rootScope.profileSettings.cookie = cookie;
                     $rootScope.activationFlags.isLoggedIn = true;
-                    $scope.loginInfo= {};
-                    console.log("login with:");
-                    console.log(loginJSON.email);
                     $rootScope.activationFlags.loading = false;
                     $rootScope.hideWait();
-                    $rootScope.goToState('tab.AddTask');
+                    $rootScope.profileSettings.password = null;
+
+                    if(response.group_id == null){
+                        $rootScope.initJoinGroup();
+                        $rootScope.goToState("joinGroup");
+                    }else{
+                        $rootScope.goToState('tab.AddTask');
+                    }
                 }else{
                     $rootScope.activationFlags.loading = false;
                     $rootScope.hideWait();
@@ -312,11 +353,16 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     $rootScope.doLogOut = function(){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Logging out...');
+            console.log("profile settings:");
+            console.log($rootScope.profileSettings);
             var logOutJSON = {
-                "email":$rootScope.loggedUser.email,
-                "mac_address": $rootScope.cookie
+                "email":$rootScope.profileSettings.email,
+                "mac_address": $rootScope.profileSettings.cookie
             }
+            console.log("log out json:");
+            console.log(logOutJSON);
             $rootScope.askAPI(Settings.Post, "logout", logOutJSON).then(function(response){
+                $rootScope.activationFlags.isLoggedIn = false;
                 $rootScope.hideWait();
                 $rootScope.activationFlags.loading = false;
                 $rootScope.goToState('Login');
@@ -342,16 +388,16 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.showWait('Registering...');
             $rootScope.activationFlags.loading = true;
             var registerJSON = {
-                "student_name":$scope.userInfo.studentName,
-                "email":$scope.userInfo.email,
-                "student_number":[$scope.userInfo.studentNumber],
-                "password":$scope.userInfo.password,
-                "phone_number":[$scope.userInfo.phoneNumber]
+                "student_name":$rootScope.userInfo.studentName,
+                "email":$rootScope.userInfo.email,
+                "student_number":[$rootScope.userInfo.studentNumber],
+                "password":$rootScope.userInfo.password,
+                "phone_number":[$rootScope.userInfo.phoneNumber]
             }
             $rootScope.askAPI(Settings.Post, "create_user", registerJSON).then(function(response){
                 console.log("register with:");
                 console.log(registerJSON);
-                $scope.userInfo= {};
+                $rootScope.userInfo= {};
                 $rootScope.hideWait();
                 $rootScope.activationFlags.loading = false;
                 $rootScope.goToState('Login');
@@ -396,6 +442,28 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.activationFlags.loading = false;
         }
         
+    };
+
+
+   /**
+    * @ngdoc method
+    * @name initJoinGroup
+    * @methodOf AppCtrl
+    * @description
+    * Show pop up with given title and text.
+    */
+    $rootScope.initJoinGroup = function() {
+        console.log("init join");
+        if(!$rootScope.expand){
+            $rootScope.expand= {};
+        }
+        $rootScope.expand.join = false;
+        $rootScope.expand.create = false;
+        $rootScope.askAPI(Settings.Get, "fetch_groups", ).then(function(response){
+            if(response != null){
+                $rootScope.allGroups = response;
+            }
+        });
     };
 
 
@@ -530,10 +598,10 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.validateRegister = function() {
        var valid = false;
-       if($scope.userInfo){
-            if($scope.userInfo.email != null && $scope.userInfo.studentName != null && $scope.userInfo.studentNumber != null){
-                if($scope.userInfo.password != null && $scope.userInfo.confirmPassword != null){
-                    if($scope.userInfo.password.toString().length>=5 && $scope.userInfo.password != "" && $scope.userInfo.password.toString() == $scope.userInfo.confirmPassword.toString()){
+       if($rootScope.userInfo){
+            if($rootScope.userInfo.email != null && $rootScope.userInfo.studentName != null && $rootScope.userInfo.studentNumber != null){
+                if($rootScope.userInfo.password != null && $rootScope.userInfo.confirmPassword != null){
+                    if($rootScope.userInfo.password.toString().length>=5 && $rootScope.userInfo.password != "" && $rootScope.userInfo.password.toString() == $rootScope.userInfo.confirmPassword.toString()){
                         valid = true;
                     }
                 }

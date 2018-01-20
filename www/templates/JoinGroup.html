@@ -1,0 +1,90 @@
+<ion-view hide-back-button="true">
+    <ion-nav-title>
+        <div class="bar-header-divider">
+            <div class="bar-header-divider-left">
+                <img class="bar-header-logo" src="img/ionic.png" id="logo"></img>
+            </div>
+            
+            <div class="bar-header-divider-center">
+                <h4 class="bar-header-h4">Join a group</h4>
+            </div>
+
+            <div class="bar-header-divider-right">
+                <img class="ion-log-out button-image" hidden="true" ng-click="logOut()" src="img/Logout.png"></img>
+            </div>
+        </div>
+    </ion-nav-title>
+            
+
+  <ion-content class="has-header">
+
+        <ion-list class="list-long">
+          
+            <h3 class="bar-header-h3" ng-click="expand.join = !expand.join">
+                <div>
+                    Join group ( {{ allGroups.length }} )
+                    <i class="icon icon-button ion-minus-round" ng-if="expand.join"></i>
+                    <i class="icon icon-button ion-plus-round" ng-if="!expand.join" ></i>
+                </div>
+            </h3>
+
+            <ion-item ng-if="expand.join && allGroups.length === 0" class="item">      
+                <div class="is-empty">
+                    No groups available now. 
+                </div>
+            </ion-item>
+
+            <ion-item class="item list-long">
+                <ion-radio ng-if="expand.join" ng-repeat="group in allGroups track by $index" class="item-radio item-list item-icon-right">
+                    <ion-item class="item">
+                        <div class="display-line">
+                            <div class="inline-1">
+                                {{ group.name }}
+                            </div>
+                            <div class="inline-2">
+                                <i class="icon ion-plus" ng-click="doJoinGroup(group.id)"></i>
+                            </div>
+                        </div>
+                    </ion-item>
+                </ion-radio>
+            </ion-item>
+
+            <h3 class="bar-header-h3" ng-click="expand.create = !expand.create">
+                <div>
+                    Create new group
+                    <i class="icon icon-button ion-minus-round" ng-if="expand.create"></i>
+                    <i class="icon icon-button ion-plus-round" ng-if="!expand.create" ></i>
+                </div>
+            </h3>
+
+            <ion-list ng-if="expand.create" class="list-long">   
+
+                    <label class="label">Group's name <span class="input-mandatory-asterix"> *</span>
+                            <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="groupInfo.group_name"/>
+                    </label>
+
+                    <label class="label">Short description
+                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="groupInfo.group_description"/>
+                    </label>
+
+                    <label class="item" ng-if="groupInfo.group_name != null">
+                        <button class="button button-block button-positive" ng-click="doCreateGroup()">
+                            <i class="icon ion-arrow-return-left"></i>
+                            Create group
+                        </button>
+                    </label>
+            </ion-list>
+
+            <ion-item>
+                    <label class="item">
+                        <button class="button button-block button-close" ng-click="doLogOut()">
+                            <i class="icon ion-arrow-return-left"></i>
+                            Log Out
+                        </button>
+                    </label>
+            </ion-item>
+            
+
+        </ion-list>
+    </ion-content>
+</ion-view>
