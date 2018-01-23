@@ -13,10 +13,10 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
 
 
       // watch activationFlags.tabInit and do init if changed
-      $scope.$watch('reloadActive.init', function() {
+    $scope.$watch('reloadActive.init', function() {
         if($rootScope.activationFlags.tabInit){
-                //$scope.init();
-                $rootScope.activationFlags.tabInit = false;
+            //$scope.init();
+            $rootScope.activationFlags.tabInit = false;
         }
     });
 
@@ -30,38 +30,68 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
         "3":"Other",    
     };
 
+    
 
-
-    $scope.clear = function (){
-        console.log("clear");
-        console.log($scope.Task);
-        $scope.Task = {};
-                
-    };
-
+    /**
+    * @ngdoc method
+    * @name displayEnum
+    * @methodOf AddTaskCtrl
+    * @description
+    * 
+    */
     $scope.displayEnum = function (num){
         console.log("display enum");
         return $scope.Categories[num];
     };
 
 
+
+    /**
+    * @ngdoc method
+    * @name displayEnum
+    * @methodOf AddTaskCtrl
+    * @description
+    * 
+    */
     $scope.submit = function (){
         console.log("submit");
         console.log($scope.Task);
-        var text = "Send this: <br/> <br/>Duration: " + $scope.Task.duration +" <br/> <br/>Category: " + $scope.Task.category;
+        var text = "Submit this as your task? <br/><br/>Duration: " + $scope.Task.duration +"H <br/>Category: " + $scope.Task.category;
         $rootScope.showDeferredPopup("Confirm", text).then(function(res){
             if(res){
-                console.log("sent");
-                $scope.Task = {};
-            }
-            
-        });
+                $rootScope.showWait('Sending...');
+                $rootScope.activationFlags.loading = true;
+                var taskJSON = {
+                    "email":$rootScope.profileSettings.email,
+                    "hour_count":$scope.Task.duration,
+                    "task_type": $scope.Task.category               
+                };
+                $rootScope.askAPI(Settings.Post, "add_task", taskJSON).then(function(response){
+                    if(response != null){
+                        $rootScope.activationFlags.loading = false;
+                        $rootScope.hideWait();
+                        $scope.Task = {};
+                    
+                    }else{
+                        $rootScope.activationFlags.loading = false;
+                        $rootScope.hideWait();
+                    }
+                });//askAPI
+            }//if confirrm true
+        });//confirm
         
     };
-    
+
+
+
+    /**
+    * @ngdoc method
+    * @name displayEnum
+    * @methodOf AddTaskCtrl
+    * @description
+    * 
+    */
     $scope.updateTask = function (cat){
-        console.log("update task");
         $scope.Task.category = cat;
-        console.log($scope.Task);
     };
 });

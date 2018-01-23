@@ -85,7 +85,7 @@
     border-bottom: 1px solid black;
     margin-top: 0px;
     margin-bottom: 0px;
-    background-color: $ApplicationTheme-blue !important;
+    background-color: $ApplicationTheme-lightblue !important;
     color: $ApplicationTheme-white;  
     text-align: center;
 }
@@ -167,12 +167,14 @@ body {
     background-color: $ApplicationTheme-button-action;
     color: $ApplicationTheme-white;
     max-width: 80%;
+    width: 70%;
     font-size: $fontSize;
 }
 
 .button-close {
     background-color: $ApplicationTheme-button-red;
     color:$ApplicationTheme-white;
+    width: 70%;
 }
 
 .button-close-list {
@@ -263,9 +265,10 @@ body {
 }
 
 .button-positive {
+    width: 70%;
     border-color: $ApplicationTheme-button-border !important;
     background-color: $ApplicationTheme-button-background !important;
-    color: $ApplicationTheme-button-textcolor;
+    color: whitesmoke;
     //left: 10%;
     //text-align: left;
 }
@@ -286,6 +289,8 @@ body {
     overflow-x: auto;
     overflow-y: hidden; 
 }
+
+
 
 #coordinates {
     height: 100%;
@@ -508,7 +513,7 @@ input[type=range] {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-    background: $ApplicationTheme-input-textcolor-blue;
+    background: transparent !important;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -590,6 +595,9 @@ input[disabled] {
     //text-align: center;
 }
 
+.item-padding-bottom-30 {
+    padding-bottom: 30px!important;
+}
 .item-radio {
     padding: 0px !important;
     border: 1px solid $ApplicationTheme-blue;

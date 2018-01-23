@@ -231,7 +231,6 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Creating your new group...');
             $rootScope.activationFlags.loading = true;
-            var time = new Date().getTime();
             var createJSON = {
                 "email":$rootScope.profileSettings.email,
                 "group_name": $rootScope.groupInfo.group_name,
@@ -263,26 +262,34 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     *  
     * @param {String} groupID ID of the group in question
     */
-    $rootScope.doJoinGroup = function (groupID){
+    $rootScope.doJoinGroup = function (group){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
-            $rootScope.showWait('Joining...');
-            $rootScope.activationFlags.loading = true;
-            var time = new Date().getTime();
-            var joinJSON = {
-                "email":$rootScope.profileSettings.email,
-                "group_id":groupID                
-            };
-            $rootScope.askAPI(Settings.Post, "join_group", joinJSON).then(function(response){
-                if(response != null){
-                    console.log(response);
-                    $rootScope.activationFlags.loading = false;
-                    $rootScope.hideWait();
-                   
-                }else{
+            $scope.selectedGroup = group;
+            $rootScope.showDeferredPopup("Confirm", "Do you want to join "+ $scope.selectedGroup.name+"?").then(function(res){
+                if(res){//confirm yes
+                    $rootScope.showWait('Joining...');
+                    $rootScope.activationFlags.loading = true;
+                    var joinJSON = {
+                        "email":$rootScope.profileSettings.email,
+                        "group_id":$scope.selectedGroup.group_id                
+                    };
+                    $rootScope.askAPI(Settings.Post, "join_group", joinJSON).then(function(response){
+                        if(response != null){
+                            $rootScope.goToState('tab.AddTask');
+                            $rootScope.activationFlags.loading = false;
+                            $rootScope.hideWait();
+                        
+                        }else{
+                            $rootScope.activationFlags.loading = false;
+                            $rootScope.hideWait();
+                        }
+                    });
+                }else{//confirm no
                     $rootScope.activationFlags.loading = false;
                     $rootScope.hideWait();
                 }
             });
+            
         }else{
             console.log("I'm busy as a bee!");
         }
@@ -315,12 +322,12 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             console.log(loginJSON);
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
                 if(response != null){
-
+                    $rootScope.profileSettings.password = null;
+                    $rootScope.profileSettings = response;
                     $rootScope.profileSettings.cookie = cookie;
                     $rootScope.activationFlags.isLoggedIn = true;
                     $rootScope.activationFlags.loading = false;
                     $rootScope.hideWait();
-                    $rootScope.profileSettings.password = null;
 
                     if(response.group_id == null){
                         $rootScope.initJoinGroup();
@@ -329,6 +336,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                         $rootScope.goToState('tab.AddTask');
                     }
                 }else{
+                    $rootScope.profileSettings.password = null;
                     $rootScope.activationFlags.loading = false;
                     $rootScope.hideWait();
                 }
@@ -453,10 +461,10 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     * Show pop up with given title and text.
     */
     $rootScope.initJoinGroup = function() {
-        console.log("init join");
         if(!$rootScope.expand){
             $rootScope.expand= {};
         }
+        $scope.selectedGroup = {};
         $rootScope.expand.join = false;
         $rootScope.expand.create = false;
         $rootScope.askAPI(Settings.Get, "fetch_groups", ).then(function(response){
@@ -583,6 +591,21 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             template: loading,
             delay: Settings.LOADING_SPINNER_DELAY
         });
+    };
+
+
+
+    /**
+    * @ngdoc method
+    * @name updateSelectedGroup
+    * @methodOf AppCtrl
+    * @description
+    * assign selected group, and update the variable
+    *
+    * @param {Object} group Group-object to assign
+    */
+    $rootScope.updateSelectedGroup = function(group) {
+        $scope.selectedGroup = group;
     };
 
 

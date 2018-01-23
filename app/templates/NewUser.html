@@ -58,14 +58,14 @@
                
 
                     <label class="item">
-                        <button  type="submit" ng-disabled="activationFlags.loading" ng-if="validateRegister()" class="button button-block button-positive button-noleft button-positive-list" ng-click="doRegister()">
+                        <button  type="submit" ng-disabled="activationFlags.loading" ng-if="validateRegister()" class="button button-positive" ng-click="doRegister()">
                             <i class="icon ion-person-add"></i>
-                            Create new user
+                            Create user
                         </button>
                     </label>
 
                     <label class="item">
-                        <button class="button button-block button-close button-noleft button-positive-list" ng-click="goToState('Login')">
+                        <button class="button button-close" ng-click="goToState('Login')">
                             <i class="icon ion-arrow-return-left"></i>
                             Back
                         </button>

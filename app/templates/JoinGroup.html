@@ -35,18 +35,19 @@
             </ion-item>
 
             <ion-item class="item list-long">
-                <ion-radio ng-if="expand.join" ng-repeat="group in allGroups track by $index" class="item-radio item-list item-icon-right">
-                    <ion-item class="item">
-                        <div class="display-line">
-                            <div class="inline-1">
-                                {{ group.name }}
-                            </div>
-                            <div class="inline-2">
-                                <i class="icon ion-plus" ng-click="doJoinGroup(group.id)"></i>
-                            </div>
-                        </div>
-                    </ion-item>
+
+                <ion-radio ng-if="expand.join" ng-repeat="group in allGroups track by $index" class="item-radio item-list item-icon-right" ng-click="updateSelectedGroup(group)">
+                    <label class="label">
+                        {{ group.name }}
+                    </label>
                 </ion-radio>
+            </ion-item>
+
+            <ion-item class="item list-short item-padding-bottom-30" ng-if="selectedGroup != null && expand.join">
+                <button class="button-action button" ng-click="doJoinGroup(selectedGroup)">
+                    <i class="icon ion-plus"></i>
+                    Join group
+                </button>
             </ion-item>
 
             <h3 class="bar-header-h3" ng-click="expand.create = !expand.create">
@@ -59,29 +60,27 @@
 
             <ion-list ng-if="expand.create" class="list-long">   
 
-                    <label class="label">Group's name <span class="input-mandatory-asterix"> *</span>
-                            <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="groupInfo.group_name"/>
-                    </label>
+                <label class="label">Group's name <span class="input-mandatory-asterix"> *</span>
+                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="groupInfo.group_name"/>
+                </label>
 
-                    <label class="label">Short description
-                        <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="groupInfo.group_description"/>
-                    </label>
+                <label class="label">Short description
+                    <input class=" item input-label" type="text" ng-disabled="loginActive" ng-model="groupInfo.group_description"/>
+                </label>
 
-                    <label class="item" ng-if="groupInfo.group_name != null">
-                        <button class="button button-block button-positive" ng-click="doCreateGroup()">
-                            <i class="icon ion-arrow-return-left"></i>
-                            Create group
-                        </button>
-                    </label>
+                <label class="item" ng-if="groupInfo.group_name != null">
+                    <button class="button-positive button" ng-click="doCreateGroup()">
+                        <i class="icon ion-arrow-return-left"></i>
+                        Create group
+                    </button>
+                </label>
             </ion-list>
 
-            <ion-item>
-                    <label class="item">
-                        <button class="button button-block button-close" ng-click="doLogOut()">
-                            <i class="icon ion-arrow-return-left"></i>
-                            Log Out
-                        </button>
-                    </label>
+            <ion-item class="item list-short item-padding-bottom-30">
+                <button class="button-close button" ng-click="doLogOut()">
+                    <i class="icon ion-arrow-return-left"></i>
+                    Log Out
+                </button>
             </ion-item>
             
 

@@ -13,16 +13,18 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
     
         // watch activationFlags.tabInit and do init if changed
         $scope.$watch('reloadActive.init', function() {
-            if($rootScope.activationFlags.tabInit){
-                    //$scope.init();
-                    $rootScope.activationFlags.tabInit = false;
-            }
+            console.log($scope.groupMembers);
+            if(!$scope.groupMembers || $scope.groupMembers.length < 1){
+                $scope.init();
+            }    
+            $rootScope.activationFlags.tabInit = false;
         });
 
 
     $scope.expand = {};
     $scope.expand.members = false;
-    $scope.groupMembers = [
+    $scope.groupMembers = [];
+    /* [
         {
             "Name":"member1",
             "Email":"email@student.oulu.fi",
@@ -42,14 +44,41 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
             "Other":"More data"
         }
     ];
+*/
 
+
+    /**
+    * @ngdoc method
+    * @name init
+    * @methodOf ManageGroupCtrl
+    * @description
+    * 
+    */
+    $scope.init = function(){
+        console.log("manage group init");
+        console.log($rootScope.profileSettings);
+        if($rootScope.profileSettings.group_id != null){
+            $rootScope.askAPI(Settings.Post, "fetch_groups", $rootScope.profileSettings.group_id).then(function(response){
+                if(response != null){
+                    $rootScope.groupMembers = response;
+                }
+            });
+        }
+    } 
+
+    /**
+    * @ngdoc method
+    * @name showGroupMemberData
+    * @methodOf ManageGroupCtrl
+    * @description
+    * 
+    */
     $scope.showGroupMemberData = function(member){
         var text = "Email: "+ member.Email + "<br/>Number: " + member.Number +  "<br/>Details: " + member.Other;
         $rootScope.showDeferredAlert(member.Name,text).then(function(){
             return;
         });
-    }
-    
+    } 
 
     
     

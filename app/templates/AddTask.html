@@ -28,13 +28,13 @@
                 <label class="label"> 
                     <div class="item range">
                         <i class="label-rating-bad" >0H</i>
-                        <input  min="0", max="4" step="0.5" type="range" ng-model="Task.duration"/>
+                        <input type="range" min="0", max="4" step="0.5"  ng-model="Task.duration"/>
                         <i class="label-rating-good" >4H</i>    
                     </div>
 
                     <div class="item range"></div>
                         <label class="label-rating-good"> 
-                            {{ Task.duration }}
+                            {{ Task.duration }}H
                         </label>
                     </div>
                 </label>
@@ -55,7 +55,7 @@
 
             <ion-item class="item list-long">
 
-                <button id="addATask-button1" ng-if="Task.duration && Task.category" class="button button-positive button-block" ng-click="submit()">
+                <button ng-if="Task.duration && Task.category" class="button-positive button" ng-click="submit()">
                     Submit
                 </button>
 
