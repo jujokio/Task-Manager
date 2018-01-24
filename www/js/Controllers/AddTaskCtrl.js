@@ -48,14 +48,12 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
 
     /**
     * @ngdoc method
-    * @name displayEnum
+    * @name submit
     * @methodOf AddTaskCtrl
     * @description
     * 
     */
     $scope.submit = function (){
-        console.log("submit");
-        console.log($scope.Task);
         var text = "Submit this as your task? <br/><br/>Duration: " + $scope.Task.duration +"H <br/>Category: " + $scope.Task.category;
         $rootScope.showDeferredPopup("Confirm", text).then(function(res){
             if(res){
@@ -86,10 +84,12 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
 
     /**
     * @ngdoc method
-    * @name displayEnum
+    * @name updateTask
     * @methodOf AddTaskCtrl
     * @description
-    * 
+    * Update task.category
+    *
+    * @param {Object} cat 
     */
     $scope.updateTask = function (cat){
         $scope.Task.category = cat;

@@ -13,17 +13,15 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
     
         // watch activationFlags.tabInit and do init if changed
         $scope.$watch('reloadActive.init', function() {
-            console.log($scope.groupMembers);
-            if(!$scope.groupMembers || $scope.groupMembers.length < 1){
-                $scope.init();
-            }    
+            $scope.init();   
             $rootScope.activationFlags.tabInit = false;
         });
 
 
     $scope.expand = {};
     $scope.expand.members = false;
-    $scope.groupMembers = [];
+    $scope.expand.timeline =false;
+
     /* [
         {
             "Name":"member1",
@@ -55,13 +53,27 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
     * 
     */
     $scope.init = function(){
-        console.log("manage group init");
-        console.log($rootScope.profileSettings);
+        $rootScope.showWait("Loading group data...");
+        if(!$rootScope.ownGroup){
+            $rootScope.ownGroup = {};
+            $rootScope.ownGroup.groupMembers = [];
+            $rootScope.timelineItems = {};
+        }
         if($rootScope.profileSettings.group_id != null){
-            $rootScope.askAPI(Settings.Post, "fetch_groups", $rootScope.profileSettings.group_id).then(function(response){
+            var fetchJSON = {
+                "email":$rootScope.profileSettings.email
+            }
+            $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
+                console.log(response);
                 if(response != null){
-                    $rootScope.groupMembers = response;
+
+                    $rootScope.ownGroup.group = response.group;
+                    $rootScope.ownGroup.groupMembers = response.members;
+                    $rootScope.timelineItems = response.last_8_days_task_entries;
+
+                    console.log($rootScope.ownGroup);
                 }
+                $rootScope.hideWait();
             });
         }
     } 
@@ -71,10 +83,10 @@ angular.module('starter').controller('ManageGroupCtrl', function($scope, $rootSc
     * @name showGroupMemberData
     * @methodOf ManageGroupCtrl
     * @description
-    * 
+    * Display user name and phonenumber if one is provided.
     */
     $scope.showGroupMemberData = function(member){
-        var text = "Email: "+ member.Email + "<br/>Number: " + member.Number +  "<br/>Details: " + member.Other;
+        var text = "Email: "+ member.email + "<br/>Number: " + member.phone_number;
         $rootScope.showDeferredAlert(member.Name,text).then(function(){
             return;
         });

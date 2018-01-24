@@ -328,13 +328,14 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                     $rootScope.activationFlags.isLoggedIn = true;
                     $rootScope.activationFlags.loading = false;
                     $rootScope.hideWait();
-
-                    if(response.group_id == null){
-                        $rootScope.initJoinGroup();
-                        $rootScope.goToState("joinGroup");
-                    }else{
-                        $rootScope.goToState('tab.AddTask');
-                    }
+                    $rootScope.greetings().then(function(){
+                        if(response.group_id == null){
+                            $rootScope.initJoinGroup();
+                            $rootScope.goToState("joinGroup");
+                        }else{
+                            $rootScope.goToState('tab.AddTask');
+                        }
+                    });
                 }else{
                     $rootScope.profileSettings.password = null;
                     $rootScope.activationFlags.loading = false;
@@ -431,6 +432,61 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         $state.go(stateName, {}, {
             reload: true
         });
+    };
+
+
+
+    /**
+    * @ngdoc method
+    * @name greetings
+    * @methodOf AppCtrl
+    * @description
+    * Show greetings dialog for user with user name displayed.
+    * Message changes overtime.
+    * Is deferred, No reject
+    *  
+    */
+    $rootScope.greetings = function(){
+        $rootScope.hideWait();
+        var deferred = $q.defer();
+        var greet = "Hello";
+        var h = new Date().getHours();
+        if(h <= 5){
+            greet = "You really should sleep at some point you know.";
+        }else if(h > 5 && h <= 7){
+            greet = "Good morning, or is it still night?";
+        }else if(h > 7 && h < 12){
+            greet = "Good morning! Have a nice day";
+        }else if(h == 12){
+            greet = "What  pleasant day, don't forget to take a breaks.";
+        }else if(h > 12 && h < 16){
+            greet = "Good afternoon.";
+        }else if(h >= 16 && h < 20  ){
+            greet = "Oh dear, still working?";
+        }else if(h >= 20){
+            greet = "Have a nice evening.";
+        }
+
+        if(new Date().getDay()==5){
+            greet += "<br/><br/>"+ "Have a great weekend!";
+        }
+
+        var succ = $ionicPopup.show({
+            template: greet,
+            title: "Greetings " + $rootScope.profileSettings.name,
+            subTitle: "",
+            scope: $rootScope,
+            cssClass: 'alert-normal',
+            buttons: [{
+                text: "Ok",
+                type: 'button button-positive',
+                onTap: function() { 
+                        succ.close();
+                        deferred.resolve(true);
+                }
+            }]
+        });
+        return deferred.promise; 
     };
 
 

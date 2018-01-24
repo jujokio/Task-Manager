@@ -21,17 +21,17 @@
 
         <h3 class="bar-header-h3" ng-click="expand.members = !expand.members">
                 <div>
-                    Your group name ( {{ groupMembers.length }} )
+                    {{  ownGroup.group.name }} ( {{ ownGroup.groupMembers.length }} )
                     <i class="icon icon-button ion-minus-round" ng-if="expand.members"></i>
                     <i class="icon icon-button ion-plus-round" ng-if="!expand.members" ></i>
                 </div>
         </h3>
 
-        <ion-item ng-if="expand.members" ng-repeat="member in groupMembers track by $index" class="item-avatar item-list item-icon-right" id="group-list-item7">
+        <ion-item ng-if="expand.members" ng-repeat="member in ownGroup.groupMembers track by $index" class="item-avatar item-list item-icon-right" id="group-list-item7">
             <ion-item class="item">
                 <div class="display-line">
                     <div class="inline-1">
-                        {{ member.Name }}
+                        {{ member.name }}
                     </div>
                     <div class="inline-2">
                         <i class="icon ion-information-circled" ng-click="showGroupMemberData(member)"></i>
@@ -40,16 +40,88 @@
             </ion-item>
         </ion-item>
 
-        <h3 class="bar-header-h3">
+        <h3 class="bar-header-h3" ng-click="expand.timeline = !expand.timeline">
+            <div>
                 Timeline
+                <i class="icon icon-button ion-minus-round" ng-if="expand.timeline"></i>
+                <i class="icon icon-button ion-plus-round" ng-if="!expand.timeline" ></i>
+            </div>
         </h3>
-        <ion-list class="list-long">
-            <ion-item>
-                Here is the timeline
-            </ion-item>
+
+        <ion-list ng-if="expand.timeline" class="list-long">
+
+            <div class="container">
+                <ul class="timeline">
+                  
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge warning">10.1</div>
+                        <div class="timeline-panel">
+
+                            <div class="timeline-item">
+                                <div class="display-line">
+                                    <div class="inline-1">
+
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">Coding</h4>
+                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 6 hours ago </small></p>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <p>Asare logged 6H to coding to the project</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="inline-2">
+                                        <button class="button button-positive btn-primary btn-sm"><i class="glyphicon glyphicon-thumbs-up"></i>0</button> 
+                                    </div>
+                                </div>
+                            </div>
+                   
+
+                            <div class="timeline-item">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Documentation</h4>
+                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago </small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Jussi logged 6H to coding to the project</p>
+                                    <div style="float:right">
+                                        <button type="button" class="button button-positive btn-primary btn-sm"><i class="glyphicon glyphicon-thumbs-up"></i> +1 </button> 
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                      
+                    </li>
+                  
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge warning">6.1</div>
+                      <div class="timeline-panel">
+                        <div class="timeline-heading">
+                          <h4 class="timeline-title">Coding</h4>
+                          <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 6 hours ago </small></p>
+                        </div>
+                        <div class="timeline-body">
+                          <p>Asare logged 6H to coding to the project</p>
+                        </div>
+                        
+                        <div class="timeline-heading">
+                          <h4 class="timeline-title">Documentation</h4>
+                          <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago </small></p>
+                        </div>
+                        <div class="timeline-body">
+                          <p>Juusi logged 6H to coding to the project</p>
+                          <div style="float:right"> <button type="button" class="button button-positive btn-primary btn-sm"><i class="glyphicon glyphicon-thumbs-up"></i> +3 </button> </div>
+                        </div>
+                      </div>
+                    </li>
+                  
+                </ul>
+            </div>
+
         </ion-list>
-        
-       
       </ion-list>
     </ion-content>
   </ion-view>

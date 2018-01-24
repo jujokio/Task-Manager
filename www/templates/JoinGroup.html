@@ -34,7 +34,7 @@
                 </div>
             </ion-item>
 
-            <ion-item class="item list-long">
+            <ion-item class="item list-long" style="padding-bottom:10px">
 
                 <ion-radio ng-if="expand.join" ng-repeat="group in allGroups track by $index" class="item-radio item-list item-icon-right" ng-click="updateSelectedGroup(group)">
                     <label class="label">
@@ -44,7 +44,7 @@
             </ion-item>
 
             <ion-item class="item list-short item-padding-bottom-30" ng-if="selectedGroup != null && expand.join">
-                <button class="button-action button" ng-click="doJoinGroup(selectedGroup)">
+                <button class="button-positive button" ng-click="doJoinGroup(selectedGroup)">
                     <i class="icon ion-plus"></i>
                     Join group
                 </button>
