@@ -27,7 +27,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $ionicPlatform.ready(function() {
         if(!$rootScope.activationFlags){
-            console.log("RESET!");
+
             $rootScope.isOnline = {}; // offline?
             $rootScope.profileSettings = {}; // store user settings, names...
             $rootScope.activationFlags = {}; // activationFlags. flags flags flags...
@@ -318,8 +318,6 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                 "password":$rootScope.profileSettings.password,
                 "mac_address": cookie
             }
-            console.log("login json:");
-            console.log(loginJSON);
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
                 if(response != null){
                     $rootScope.profileSettings.password = null;
@@ -429,6 +427,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.goToState = function (stateName){
         console.log("go to: " + stateName);
+        
         $state.go(stateName, {}, {
             reload: true
         });

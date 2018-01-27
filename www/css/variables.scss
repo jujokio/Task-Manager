@@ -1,8 +1,13 @@
 
 // Theme colors
-$ApplicationTheme-lightblue:  #63B9BE !default;
-$ApplicationTheme-blue:  #008A92 !default;
-$ApplicationTheme-darkblue: #E37430 !default;
+$ApplicationTheme-lightPrimary:  #63B9BE !default;
+$ApplicationTheme-lightSecondary: #f0ad4e !default;
+$ApplicationTheme-primary:  #008A92 !default;
+$ApplicationTheme-secondary:  #008A92 !default;
+$ApplicationTheme-darkPrimary: #E37430 !default;
+$ApplicationTheme-darkSecondary: #E37430 !default;
+
+// common colors
 $ApplicationTheme-darkgrey: #6a6a6a !default;
 $ApplicationTheme-offline-red: #FF0000 !default;
 $ApplicationTheme-logo-background: green !default; // not used

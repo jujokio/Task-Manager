@@ -64,7 +64,7 @@ angular.module('starter').controller('StatisticsCtrl', function($rootScope, $sco
         $scope.groups = [];
 
             // watch activationFlags.tabInit and do init if changed
-        $scope.$watch('reloadActive.init', function() {
+        $scope.$watch('activationFlags.tabInit', function() {
             $scope.init();
             $rootScope.activationFlags.tabInit = false;
         });

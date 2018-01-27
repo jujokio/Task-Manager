@@ -66,9 +66,11 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
                 };
                 $rootScope.askAPI(Settings.Post, "add_task", taskJSON).then(function(response){
                     if(response != null){
-                        $rootScope.activationFlags.loading = false;
                         $rootScope.hideWait();
-                        $scope.Task = {};
+                        $rootScope.showDeferredAlert("Success", "Task added. Well done!").then(function(res){
+                            $rootScope.activationFlags.loading = false;
+                            $scope.Task = {};
+                        });
                     
                     }else{
                         $rootScope.activationFlags.loading = false;

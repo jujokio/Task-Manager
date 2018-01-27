@@ -5,7 +5,7 @@
     
     .popup {
         width: 80% !important;
-        border: 1px solid $ApplicationTheme-blue !important;
+        border: 1px solid $ApplicationTheme-primary !important;
         border-top-left-radius: 5px !important;
         border-top-right-radius: 5px !important;
         border-bottom-left-radius: 5px !important;
@@ -77,8 +77,8 @@
     .button-positive.activated {
         //font-weight: bold !important;
         //font-size: 0.8em !important;
-        background-color: $ApplicationTheme-darkblue !important;
-        border-color: $ApplicationTheme-darkblue !important;
+        background-color: $ApplicationTheme-darkSecondary !important;
+        border-color: $ApplicationTheme-darkSecondary !important;
     }
 
     .button.button-negative {
@@ -183,7 +183,7 @@ ion-modal-view ion-content {
     right: 0;
     bottom: 0;
     left: 0;
-    border: 1px solid $ApplicationTheme-blue;
+    border: 1px solid $ApplicationTheme-primary;
     position: relative;
     padding-bottom: 15px;
 }
@@ -243,7 +243,7 @@ ion-modal-view ion-content {
 }
 
 .ionic_datepicker_popup .selected_date {
-    background-color: $ApplicationTheme-darkblue !important;
+    background-color: $ApplicationTheme-darkSecondary !important;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -258,11 +258,11 @@ ion-modal-view ion-content {
 }
 
 .ionic_datepicker_popup .popup-body .selected_date_full {
-    background-color: $ApplicationTheme-darkblue !important;
+    background-color: $ApplicationTheme-darkSecondary !important;
 }
 
 .ionic_datepicker_popup .popup-buttons .button_set{
-    background-color: $ApplicationTheme-darkblue;
+    background-color: $ApplicationTheme-darkSecondary;
 }
 
 .ionic_datepicker_popup .popup-buttons .button_today{
