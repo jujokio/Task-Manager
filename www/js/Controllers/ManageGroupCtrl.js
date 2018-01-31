@@ -11,12 +11,14 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     //$scope.$on('$ionicView.enter', function(e) {
     //});
     
-        // watch activationFlags.tabInit and do init if changed
-        $scope.$watch('reloadActive.tabInit', function() {
-            console.log("Manage group");
+    // watch activationFlags.tabInit and do init if changed
+    $scope.$watch('activationFlags.tabInit2', function() {
+        if($rootScope.activationFlags.tabInit2){
+            console.log("Manage group init");
             $scope.init();   
-            $rootScope.activationFlags.tabInit = false;
-        });
+            $rootScope.activationFlags.tabInit2 = false;
+        }
+    });
 
 
     $scope.expand = {};
@@ -42,7 +44,15 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             };
             $rootScope.askAPI(Settings.Post, "vote_task", voteJSON).then(function(response){
                 if(response != null){
-                    item.likes++;
+                    if(!item.liked){
+                        item.likes++;
+                        item.liked = true;
+                    }
+                    else{
+                        item.likes--;
+                        item.liked = false;
+                    }
+
                 }
                 $rootScope.activationFlags.loading = false;
                 $rootScope.hideWait();

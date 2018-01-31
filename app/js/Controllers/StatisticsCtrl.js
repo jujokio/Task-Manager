@@ -53,7 +53,7 @@
 */
 
 
-angular.module('starter').controller('StatisticsCtrl', function($rootScope, $scope, $state) {
+angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, $scope, $state) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -61,14 +61,21 @@ angular.module('starter').controller('StatisticsCtrl', function($rootScope, $sco
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-        $scope.groups = [];
+       
 
-            // watch activationFlags.tabInit and do init if changed
-        $scope.$watch('activationFlags.tabInit', function() {
-            $scope.init();
-            $rootScope.activationFlags.tabInit = false;
+        // watch activationFlags.tabInit and do init if changed
+        $scope.$watch('activationFlags.tabInit3', function() {
+            if($rootScope.activationFlags.tabInit3){
+                console.log("stats init");
+                $scope.init();
+                $rootScope.activationFlags.tabInit3 = false;
+            }
         });
+
+
+        $scope.groups = [];
     
+        /*
         $scope.init = function (){
             console.log("Hello stats");
             
@@ -100,6 +107,49 @@ angular.module('starter').controller('StatisticsCtrl', function($rootScope, $sco
                 $scope.groups.push(temp);
             }
         };
+
+        */
+
+
+    /**
+    * @ngdoc method
+    * @name init
+    * @methodOf StatisticsCtrl
+    * @description
+    * init, fired every time when browsed to the Statistics tab
+    * Calls askAPI()
+    * 
+    */
+    $scope.init = function(){
+        var deferred = $q.defer();
+        $rootScope.showWait("Loading group data...");
+        if(!$rootScope.ownGroup){
+            $rootScope.ownGroup = {};
+            $rootScope.ownGroup.groupMembers = [];
+        }
+        if($rootScope.profileSettings.group_id != null){
+            $rootScope.askAPI(Settings.Get, "fetch_groups").then(function(response){
+                console.log("response is");
+                console.log(response);
+                if(response != null){
+                    for (i=0; i<response.length;i++){
+                        if (response[i].group_id == $rootScope.profileSettings.group_id){
+                            if($rootScope.ownGroup.groupMembers.length==0){
+                                $rootScope.ownGroup = response[i];
+                            }
+                        }else{
+                            $scope.groups.push(response[i]);
+                        }
+                    }
+                }
+                $rootScope.hideWait();
+                console.log("pushed groups is finally");
+                console.log($scope.groups);
+                deferred.resolve();
+            });
+        }
+        return deferred.promise;
+    } 
   
   });
   

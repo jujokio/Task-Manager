@@ -916,7 +916,7 @@ td.no-border {
     padding: 20px 0 20px;
     position: relative;
     font-size:  0.8*$fontSize;
-    overflow: scroll;
+    overflow-y: scroll;
     color: $ApplicationTheme-input-textcolor-grey;
 }
 

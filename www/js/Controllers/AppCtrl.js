@@ -14,8 +14,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     //});
 
 
-   
-
+    
     /**
     * @ngdoc method
     * @name ready
@@ -45,7 +44,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.activationFlags.logoutActive = false; // logOut active flag.
             $rootScope.activationFlags.loading = false; // Loading active flag. true when anything is loading. restricts other from loading.
             $rootScope.activationFlags.isLoggedIn = false; // Log in success flag. True when logged in.
-            $rootScope.activationFlags.tabInit = false;
+            $rootScope.activationFlags.tabInit = false;  // flag for tabs to reload
         
          
         
@@ -457,7 +456,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         }else if(h > 7 && h < 12){
             greet = "Good morning! Have a nice day";
         }else if(h == 12){
-            greet = "What  pleasant day, don't forget to take a breaks.";
+            greet = "What a pleasant day, don't forget to take a breaks.";
         }else if(h > 12 && h < 16){
             greet = "Good afternoon.";
         }else if(h >= 16 && h < 20  ){
@@ -520,13 +519,38 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.expand= {};
         }
         $scope.selectedGroup = {};
-        $rootScope.expand.join = false;
-        $rootScope.expand.create = false;
+        $rootScope.expand.join = true;
+        $rootScope.expand.create = true;
         $rootScope.askAPI(Settings.Get, "fetch_groups", ).then(function(response){
             if(response != null){
                 $rootScope.allGroups = response;
             }
         });
+    };
+
+
+
+       /**
+    * @ngdoc method
+    * @name initTab
+    * @methodOf AppCtrl
+    * @description
+    * Fire watchers when changing tab
+    *
+    * @param {Number} tabId id of tab clicked.
+    */
+    $rootScope.initTab = function(tabId) {
+        console.log("tab id: "+tabId);
+        if(tabId == 1){
+            $rootScope.activationFlags.tabInit1 = true;
+        }else if(tabId == 2){
+            $rootScope.activationFlags.tabInit2 = true;
+        }else if(tabId == 3){
+            $rootScope.activationFlags.tabInit3 = true;
+        }
+
+
+        
     };
 
 

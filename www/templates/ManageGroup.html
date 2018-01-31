@@ -21,9 +21,10 @@
 
             <h3 class="bar-header-h3" ng-click="expand.members = !expand.members">
                     <div>
-                        {{  ownGroup.group.name }} ( {{ ownGroup.groupMembers.length }} )
+                       
                         <i class="icon icon-button ion-minus-round" ng-if="expand.members"></i>
                         <i class="icon icon-button ion-plus-round" ng-if="!expand.members" ></i>
+                        {{  ownGroup.group.name }} ( {{ ownGroup.groupMembers.length }} )
                     </div>
             </h3>
             <ion-list class="list-item">
@@ -44,9 +45,9 @@
 
             <h3 class="bar-header-h3" ng-click="expand.timeline = !expand.timeline">
                 <div>
-                    Timeline
                     <i class="icon icon-button ion-minus-round" ng-if="expand.timeline"></i>
                     <i class="icon icon-button ion-plus-round" ng-if="!expand.timeline" ></i>
+                    Timeline
                 </div>
             </h3>
 

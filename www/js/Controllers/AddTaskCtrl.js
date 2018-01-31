@@ -11,24 +11,25 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-
-      // watch activationFlags.tabInit and do init if changed
-    $scope.$watch('reloadActive.init', function() {
-        if($rootScope.activationFlags.tabInit){
-            //$scope.init();
-            $rootScope.activationFlags.tabInit = false;
-        }
-    });
-
-
-    $scope.Task = {};
-    $scope.Task.duration = 0;
     $scope.Categories = {
         "0":"Coding",
         "1":"Design",
         "2":"Presentation",
-        "3":"Other",    
+        "3":"Other"
     };
+
+      // watch activationFlags.tabInit and do init if changed
+    $scope.$watch('activationFlags.tabInit1', function() {
+        if($rootScope.activationFlags.tabInit1){
+            console.log("task init");
+            $scope.Task = {};
+            $scope.Task.duration = 0;
+            $rootScope.activationFlags.tabInit1 = false;
+        }
+    });
+
+
+
 
     
 

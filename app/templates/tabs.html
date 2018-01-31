@@ -18,21 +18,21 @@ navigation history that also transitions its views in and out.
       </ion-nav-bar>
       
   
-        <ion-tabs class="tabs-icon-top tabs-color-active-positive" ng-click="activationFlags.tabInit=true">
+        <ion-tabs class="tabs-icon-top tabs-color-active-positive">
         
             <!-- Dashboard Tab -->
-            <ion-tab title="Add Task" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/AddTask">
-                <ion-nav-view name="AddTask" ng-click="activationFlags.tabInit=true"></ion-nav-view>
+            <ion-tab title="Add Task" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/AddTask" on-select="initTab(1)">
+                <ion-nav-view name="AddTask"></ion-nav-view>
             </ion-tab>
             
             <!-- Chats Tab -->
-            <ion-tab title="Manage Group" icon-off="ion-person-stalker" icon-on="ion-person-stalker" href="#/tab/ManageGroup">
+            <ion-tab title="Manage Group" icon-off="ion-person-stalker" icon-on="ion-person-stalker" href="#/tab/ManageGroup" on-select="initTab(2)">
                 <ion-nav-view name="ManageGroup"></ion-nav-view>
             </ion-tab>
             
             <!-- Account Tab -->
-            <ion-tab title="Statistics" icon-off="ion-stats-bars" icon-on="ion-stats-bars" href="#/tab/Statistics">
-                <ion-nav-view name="Statistics" ng-click="activationFlags.tabInit=true"></ion-nav-view>
+            <ion-tab title="Statistics" icon-off="ion-stats-bars" icon-on="ion-stats-bars" href="#/tab/Statistics" on-select="initTab(3)">
+                <ion-nav-view name="Statistics"></ion-nav-view>
             </ion-tab>
         </ion-tabs>
     </ion-side-menu-content>
