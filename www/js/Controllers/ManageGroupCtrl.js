@@ -78,10 +78,9 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     */
     $scope.displayDate = function(timestamp){
         var date = new Date(timestamp);
-        console.log(date);
-        console.log(date.getMonth());
-        var parsedDate = date.getDate() +"."+ date.getMonth()+1;
-        console.log(parsedDate);
+        var m = date.getMonth();
+        m++;
+        var parsedDate = date.getDate() +"."+ m;
         return parsedDate;
     } 
 

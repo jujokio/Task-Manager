@@ -964,7 +964,7 @@ td.no-border {
             width: 46%;
             float: left;
             border: 1px solid $ApplicationTheme-darkgrey;
-            background-color: $ApplicationTheme-darkSecondary;
+            background-color: $ApplicationTheme-darkPrimary;
             border-radius: 2px;
             padding: 20px;
             position: relative;
@@ -1007,7 +1007,6 @@ td.no-border {
             top: 16px;
             left: 50%;
             margin-left: -25px;
-            background-color: #999999;
             z-index: 100;
             border-top-right-radius: 50%;
             border-top-left-radius: 50%;
@@ -1042,7 +1041,7 @@ td.no-border {
 }
 
 .timeline-badge.warning {
-    background-color: #f0ad4e !important;
+    background-color: $ApplicationTheme-secondary !important;
 }
 
 .timeline-badge.danger {
