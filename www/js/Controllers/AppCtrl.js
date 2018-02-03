@@ -33,6 +33,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.userInfo = {}; // store create_user request json.
             $rootScope.groupInfo = {}; // store create_group request json.
             $rootScope.allGroups = {}; // store fetch_group request's respone.
+            $rootScope.ownGroup = {}; // store owngroup
             $rootScope.expand = {}; // expandable content
             
             /* VARIABLES */
@@ -134,10 +135,9 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.checkServerResponseStatus = function(response){
         var deferred = $q.defer();
-        $rootScope.activationFlags.loading = false;
         $rootScope.activationFlags.popupOpen = true;
+        $rootScope.activationFlags.loading = false;
         var message = "Server Messsage: ";
-
         console.log("Network error: ");
         console.error(response);
         //unauthorized?
@@ -310,6 +310,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Logging in...');
             $rootScope.activationFlags.loading = true;
+            var passhash = CryptoJS.MD5($rootScope.profileSettings.password);
             var time = new Date().getTime();
             var cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             var loginJSON = {
@@ -565,15 +566,19 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     *  
     * @param {string} title title.
     * @param {string} text text
+    * @param {string} subTitle title.
     */
-    $rootScope.showDeferredAlert = function(title, text) {
+    $rootScope.showDeferredAlert = function(title, text, subTitle) {
         var deferred = $q.defer();
+        if(subTitle == null){
+            subTitle="";
+        }
         if(!$rootScope.activationFlags.popupOpen){
             $rootScope.activationFlags.popupOpen = true;
             var popup =  $ionicPopup.show({
                             template: text,
                             title: title,
-                            subTitle: "",
+                            subTitle: subTitle,
                             scope: $rootScope,
                             cssClass: 'alert-normal',
                             buttons: [{
@@ -607,16 +612,20 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     *  
     * @param {string} title title.
     * @param {string} text text
+    * @param {string} subTitle subtitle.
     * @returns {boolean} Yes/No -> true/false
     */
-    $rootScope.showDeferredPopup = function(title, text) {
+    $rootScope.showDeferredPopup = function(title, text, subTitle) {
         var deferred = $q.defer();
+        if(subTitle == null){
+            subTitle="";
+        }
         if(!$rootScope.activationFlags.popupOpen){
             $rootScope.activationFlags.popupOpen=true;
             var popup =  $ionicPopup.show({
                         template: text,
                         title: title,
-                        subTitle: "",
+                        subTitle: subTitle,
                         scope: $rootScope,
                         cssClass: 'alert-normal',
                         buttons: [{

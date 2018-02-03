@@ -8,7 +8,7 @@
             </div>
             
             <div class="bar-header-divider-center">
-                <h4 class="bar-header-h4">Statistics</h4>
+                <h4 class="bar-header-h4">UBITASKER Statistics</h4>
             </div>
 
             <div class="bar-header-divider-right">
@@ -37,12 +37,12 @@
             </ion-item>
         </ion-list>
 
-            <ion-list ng-repeat="group in groups track by group.Id" class="item-list">
+            <ion-list ng-repeat="group in groups track by group.group_id" class="item-list">
                 <h3 class="bar-header-h3" ng-click="group.expand = !group.expand">
                         <div>
                             <i class="icon icon-button ion-minus-round" ng-if="group.expand"></i>
                             <i class="icon icon-button ion-plus-round" ng-if="!group.expand" ></i>
-                            {{ group.GroupName }} ( {{ group.Members.length }} )
+                            {{ group.name }} ( {{ group.Members.length }} )
                         </div>
                 </h3>
         

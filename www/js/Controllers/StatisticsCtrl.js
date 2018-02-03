@@ -73,7 +73,7 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
         });
 
 
-        $scope.groups = [];
+        
     
         /*
         $scope.init = function (){
@@ -123,22 +123,33 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
     $scope.init = function(){
         var deferred = $q.defer();
         $rootScope.showWait("Loading group data...");
-        if(!$rootScope.ownGroup){
-            $rootScope.ownGroup = {};
-            $rootScope.ownGroup.groupMembers = [];
+        $scope.groups = [];
+        if(!$rootScope.ownGroup || $rootScope.ownGroup.groupMembers == null){
+            fetchJSON = {
+                "email":$rootScope.profileSettings.email
+            }
+            $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
+                if(response != null){
+                    console.log("group refreshed")
+                    $rootScope.ownGroup.group = response.group;
+                    $rootScope.ownGroup.groupMembers = response.members;
+                }
+            });
         }
+        console.log($rootScope.ownGroup)
         if($rootScope.profileSettings.group_id != null){
             $rootScope.askAPI(Settings.Get, "fetch_groups").then(function(response){
                 console.log("response is");
                 console.log(response);
                 if(response != null){
                     for (i=0; i<response.length;i++){
-                        if (response[i].group_id == $rootScope.profileSettings.group_id){
-                            if($rootScope.ownGroup.groupMembers.length==0){
-                                $rootScope.ownGroup = response[i];
-                            }
-                        }else{
+                        if (response[i].group_id != $rootScope.profileSettings.group_id){
                             $scope.groups.push(response[i]);
+                            //if($rootScope.ownGroup.groupMembers.length==0){
+                            //  $rootScope.ownGroup = response[i];
+                            //}
+                        //}else{
+                            
                         }
                     }
                 }

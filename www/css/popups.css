@@ -62,8 +62,8 @@
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/popups\.scss}line{font-family:\0000377}}
 .alert-normal .button-positive.activated {
-  background-color: #E37430 !important;
-  border-color: #E37430 !important;
+  background-color: #e4610f !important;
+  border-color: #e4610f !important;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/popups\.scss}line{font-family:\0000384}}
 .alert-normal .button.button-negative {
@@ -225,7 +225,7 @@ ion-modal-view ion-content {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/popups\.scss}line{font-family:\00003245}}
 .ionic_datepicker_popup .selected_date {
-  background-color: #E37430 !important;
+  background-color: #e4610f !important;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -240,12 +240,12 @@ ion-modal-view ion-content {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/popups\.scss}line{font-family:\00003260}}
 .ionic_datepicker_popup .popup-body .selected_date_full {
-  background-color: #E37430 !important;
+  background-color: #e4610f !important;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/popups\.scss}line{font-family:\00003264}}
 .ionic_datepicker_popup .popup-buttons .button_set {
-  background-color: #E37430;
+  background-color: #e4610f;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/yyyyy\/TaskManager\/app\/css\/popups\.scss}line{font-family:\00003268}}

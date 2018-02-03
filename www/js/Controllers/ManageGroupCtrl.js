@@ -31,13 +31,14 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     * @methodOf ManageGroupCtrl
     * @description
     * upvote a single task.
+    * Calls askAPI()
     * 
     * @param {Object} item task in hand.
     */
     $scope.addUpvote = function(item){
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
-            $rootScope.showWait('Upvoting...');
             $rootScope.activationFlags.loading = true;
+            $rootScope.showWait('Upvoting...');
             var voteJSON = {
                 "email":$rootScope.profileSettings.email,
                 "task_id":item.task_id                
@@ -73,10 +74,15 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     * Display date in string.
     * 
     * @param {Date} timestamp timestamp of the date
-    * @return {String} Date.toLocalizedDateString()
+    * @return {String} day.month
     */
     $scope.displayDate = function(timestamp){
-        return new Date(timestamp).toLocaleDateString();
+        var date = new Date(timestamp);
+        console.log(date);
+        console.log(date.getMonth());
+        var parsedDate = date.getDate() +"."+ date.getMonth()+1;
+        console.log(parsedDate);
+        return parsedDate;
     } 
 
 
@@ -89,10 +95,14 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     * Display time in string.
     * 
     * @param {Date} timestamp timestamp of the date
-    * @return {String} Date.toLocalizedDateString()
+    * @return {String} (h)h.mm
     */
     $scope.displayTime = function(timestamp){
-        return new Date(timestamp).toLocaleTimeString();
+        var time = new Date(timestamp);
+        var paddingZero = ""; 
+        if(time.getMinutes() < 10){ paddingZero = "0";}
+        var parsedTimestamp = time.getHours() + ":" + paddingZero + time.getMinutes();
+        return parsedTimestamp;
     } 
 
 
@@ -168,6 +178,7 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
                 if(response != null){
                     $rootScope.ownGroup.group = response.group;
+                    $rootScope.profileSettings.group_id = response.group.group_id;
                     $rootScope.ownGroup.groupMembers = response.members;
                     $rootScope.timelineItems = response.last_8_days_task_entries;
                     $scope.pushedDates = {};
@@ -231,6 +242,51 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
         
         return deferred.promise;
     }
+
+
+
+    /**
+    * @ngdoc method
+    * @name leaveGroup
+    * @methodOf ManageGroupCtrl
+    * @description
+    * Leave your group permanently
+    * Calls askAPI()
+    * 
+    */
+    $scope.leaveGroup = function(){
+        $rootScope.showDeferredPopup("ALERT!","Are you sure you want to leave your group?","LEAVE YOUR GROUP?").then(function(res){
+            if(!res){
+                return;
+            }else{
+                $rootScope.showDeferredPopup("PLEASE VERIFY!","Are you REALLY sure you want to leave your group?","YOU CAN STILL CHANGE YOUR MIND! Think of the children!").then(function(res){
+                    if(!res){
+                        return;
+                    }
+                    if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+                        $rootScope.activationFlags.loading = true;
+                        $rootScope.showWait('Leaving...');
+                        var leaveJSON = {
+                            "email":$rootScope.profileSettings.email,
+                            "group_id": $rootScope.profileSettings.group_id              
+                        };
+                        $rootScope.askAPI(Settings.Post, "leave_group", leaveJSON).then(function(response){
+                            if(response != null){
+                                $rootScope.showDeferredAlert("You have left the group succesfully.","Please login again and choose a new group").then(function(res){
+                                    $rootScope.activationFlags.loading = false;
+                                    $rootScope.doLogOut();
+                                    $rootScope.hideWait();
+                                });// leave alert
+                            }
+                            $rootScope.activationFlags.loading = false;
+                            $rootScope.doLogOut();
+                            $rootScope.hideWait();
+                        });// askAPI
+                    }// if ! popup && ! loading 
+                });//popup2
+            }// if res
+        });//popup1
+    } 
 
 
 

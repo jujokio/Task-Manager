@@ -6,7 +6,7 @@
             </div>
             
             <div class="bar-header-divider-center">
-                <h4 class="bar-header-h4">Manage group</h4>
+                <h4 class="bar-header-h4">UBITASKER Manage group</h4>
             </div>
 
             <div class="bar-header-divider-right">
@@ -24,11 +24,11 @@
                        
                         <i class="icon icon-button ion-minus-round" ng-if="expand.members"></i>
                         <i class="icon icon-button ion-plus-round" ng-if="!expand.members" ></i>
-                        {{  ownGroup.group.name }} ( {{ ownGroup.groupMembers.length }} )
+                        Group: {{  ownGroup.group.name }} ( Members: {{ ownGroup.groupMembers.length }} )
                     </div>
             </h3>
-            <ion-list class="list-item">
-                <ion-item ng-if="expand.members" ng-repeat="member in ownGroup.groupMembers track by $index" class="item-avatar item-list item-icon-right" id="group-list-item7">
+            <ion-list class="list-item" ng-if="expand.members">
+                <ion-item  ng-repeat="member in ownGroup.groupMembers track by $index" class="item-avatar item-list item-icon-right" id="group-list-item7">
                     <ion-item class="item">
                         <div class="display-line">
                             <div class="inline-1">
@@ -40,6 +40,15 @@
                         </div>
                     </ion-item>
                 </ion-item>
+
+                <ion-item class="item list-short item-padding-bottom-30">
+                    <button class="button-close button" ng-click="leaveGroup()">
+                        <i class="icon ion-heart-broken"></i>
+                        Leave this group
+                    </button>
+                </ion-item>
+            </ion-item>
+
             </ion-list>
 
 
@@ -78,7 +87,7 @@
                                         </div>
 
                                         <div class="inline-2">
-                                            <button class="button button-positive btn-primary btn-sm" ng-click="addUpvote(item)" ><i class="button-icon ion-thumbsup" ></i>{{ item.likes }}</button> 
+                                            <button class="button button-positive button-small" ng-click="addUpvote(item)" ><i class="button-icon ion-thumbsup" ></i>{{ item.likes }}</button> 
                                         </div>
                                     </div>
                                 </div>

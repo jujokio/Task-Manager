@@ -22,6 +22,7 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
     $scope.$watch('activationFlags.tabInit1', function() {
         if($rootScope.activationFlags.tabInit1){
             console.log("task init");
+            
             $scope.Task = {};
             $scope.Task.duration = 0;
             $rootScope.activationFlags.tabInit1 = false;

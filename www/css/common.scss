@@ -283,6 +283,10 @@ body {
     margin-bottom: 5px;
 }
 
+.button-small {
+    margin-top: 20%;
+}
+
 .buttons-list {    
     display: block !important;
     top: 5px !important;
@@ -959,8 +963,8 @@ td.no-border {
         .timeline > li > .timeline-panel {
             width: 46%;
             float: left;
-            border: 1px solid $ApplicationTheme-button-border;
-            background-color: $ApplicationTheme-lightPrimary;
+            border: 1px solid $ApplicationTheme-darkgrey;
+            background-color: $ApplicationTheme-darkSecondary;
             border-radius: 2px;
             padding: 20px;
             position: relative;
@@ -1064,6 +1068,7 @@ td.no-border {
 
 .timeline-item {
     border: 1px solid $ApplicationTheme-input-textcolor-grey;
+    background-color: $ApplicationTheme-lightPrimary;
 }
 
     .timeline-body > p + p {
