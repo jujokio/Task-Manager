@@ -4,15 +4,15 @@
     <ion-nav-title>
         <div class="bar-header-divider">
             <div class="bar-header-divider-left">
-                <img class="bar-header-logo" src="img/ionic.png" id="logo"></img>
+                <img class="bar-header-logo" src="img/UBITASKERLOGO1.png" id="logo"></img>
             </div>
             
             <div class="bar-header-divider-center">
-                <h4 class="bar-header-h4">UBITASKER Statistics</h4>
+                <h4 class="bar-header-h4">Logged in as: {{ profileSettings.name }}</h4>
             </div>
 
             <div class="bar-header-divider-right">
-                <img class="ion-log-out button-image"  ng-click="doLogOut()" src="img/Logout.png"></img>
+                <img class="ion-log-out button-image" ng-click="doLogOut()" src="img/Logout.png"></img>
             </div>
         </div>
     </ion-nav-title>
@@ -20,36 +20,20 @@
     <ion-content class="has-header-and-footer has-tabs">
         
         <ion-list class="list">
-            <h3 class="bar-header-h3" ng-click="expand.owngroup = !expand.owngroup">
-                    <div>
-                        <i class="icon icon-button ion-minus-round" ng-if="expand.owngroup"></i>
-                        <i class="icon icon-button ion-plus-round" ng-if="!expand.owngroup" ></i>
-                        {{  ownGroup.group.name }} ( {{ ownGroup.groupMembers.length }} )
-                    </div>
+            <h3 class="bar-header-h3">
+                Group: {{  ownGroup.group.name }} ( Members: {{ ownGroup.groupMembers.length }} )
             </h3>
 
-            <ion-item ng-if="expand.owngroup" class="item">
-                plotted image here
+            <ion-item class="item">
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </ion-item>
 
-            <ion-item ng-if="expand.owngroup" class="item">
-                show more details here.
+            <h3 class="bar-header-h3" > Other groups</h3>
+        
+            <ion-item  class="item">
+                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </ion-item>
         </ion-list>
-
-            <ion-list ng-repeat="group in groups track by group.group_id" class="item-list">
-                <h3 class="bar-header-h3" ng-click="group.expand = !group.expand">
-                        <div>
-                            <i class="icon icon-button ion-minus-round" ng-if="group.expand"></i>
-                            <i class="icon icon-button ion-plus-round" ng-if="!group.expand" ></i>
-                            {{ group.name }} ( {{ group.Members.length }} )
-                        </div>
-                </h3>
-        
-                <ion-item ng-if="group.expand" class="item">
-                    plotted image here
-                </ion-item>
-            </ion-list>
 
     </ion-content>
   </ion-view>

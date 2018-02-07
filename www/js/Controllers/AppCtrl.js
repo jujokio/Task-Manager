@@ -46,7 +46,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.activationFlags.loading = false; // Loading active flag. true when anything is loading. restricts other from loading.
             $rootScope.activationFlags.isLoggedIn = false; // Log in success flag. True when logged in.
             $rootScope.activationFlags.tabInit = false;  // flag for tabs to reload
-        
+            $rootScope.chartData = {};
+            $rootScope.chartData.eka = [0,1,2,3,4];
          
         
             $rootScope.SidemenuList = [
@@ -315,16 +316,18 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             var cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             var loginJSON = {
                 "email":$rootScope.profileSettings.email,
-                "password":$rootScope.profileSettings.password,
+                "password":passhash,
                 "mac_address": cookie
             }
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
                 if(response != null){
+                    
                     $rootScope.profileSettings.password = null;
                     $rootScope.profileSettings = response;
                     $rootScope.profileSettings.cookie = cookie;
                     $rootScope.activationFlags.isLoggedIn = true;
                     $rootScope.activationFlags.loading = false;
+                    Restangular.setDefaultHeaders({'X-Api-Key': $rootScope.profileSettings.cookie});
                     $rootScope.hideWait();
                     $rootScope.greetings().then(function(){
                         if(response.group_id == null){
@@ -358,7 +361,15 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     *  
     */
     $rootScope.doLogOut = function(){
-        if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
+        if(!$rootScope.activationFlags.isLoggedIn){
+            $rootScope.activationFlags.isLoggedIn = false;
+            Restangular.setDefaultHeaders({'X-Api-Key': ''});
+            $rootScope.profileSettings.cookie = null;
+            $rootScope.hideWait();
+            $rootScope.activationFlags.loading = false;
+            $rootScope.goToState('Login');           
+        }
+        else if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Logging out...');
             console.log("profile settings:");
             console.log($rootScope.profileSettings);
@@ -370,6 +381,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             console.log(logOutJSON);
             $rootScope.askAPI(Settings.Post, "logout", logOutJSON).then(function(response){
                 $rootScope.activationFlags.isLoggedIn = false;
+                Restangular.setDefaultHeaders({'X-Api-Key': ''});
+                $rootScope.profileSettings.cookie = null;
                 $rootScope.hideWait();
                 $rootScope.activationFlags.loading = false;
                 $rootScope.goToState('Login');
@@ -394,11 +407,12 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Registering...');
             $rootScope.activationFlags.loading = true;
+            var passhash = CryptoJS.MD5($rootScope.userInfo.password);
             var registerJSON = {
                 "student_name":$rootScope.userInfo.studentName,
                 "email":$rootScope.userInfo.email,
                 "student_number":[$rootScope.userInfo.studentNumber],
-                "password":$rootScope.userInfo.password,
+                "password":passhash,
                 "phone_number":[$rootScope.userInfo.phoneNumber]
             }
             $rootScope.askAPI(Settings.Post, "create_user", registerJSON).then(function(response){
@@ -516,6 +530,10 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     * Show pop up with given title and text.
     */
     $rootScope.initJoinGroup = function() {
+        if (!$rootScope.activationFlags.isLoggedIn){
+            $rootScope.doLogOut();
+            return;
+        }
         if(!$rootScope.expand){
             $rootScope.expand= {};
         }
@@ -542,6 +560,10 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
     */
     $rootScope.initTab = function(tabId) {
         console.log("tab id: "+tabId);
+        if (!$rootScope.activationFlags.isLoggedIn){
+            $rootScope.doLogOut();
+            return;
+        }
         if(tabId == 1){
             $rootScope.activationFlags.tabInit1 = true;
         }else if(tabId == 2){

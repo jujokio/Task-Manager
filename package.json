@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "cordova-android": "^7.0.0"
+    "angular-chart.js": "^1.1.1",
+    "chart.js": "^2.7.1",
+    "cordova-android": "^7.0.0",
+    "taucharts": "^2.0.0"
   },
   "devDependencies": {
     "grunt": "~1.0.1",

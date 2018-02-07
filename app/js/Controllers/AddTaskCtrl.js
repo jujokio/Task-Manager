@@ -26,6 +26,8 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
             $scope.Task = {};
             $scope.Task.duration = 0;
             $rootScope.activationFlags.tabInit1 = false;
+        }else if (!$rootScope.activationFlags.isLoggedIn){
+            $rootScope.doLogOut();
         }
     });
 

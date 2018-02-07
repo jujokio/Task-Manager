@@ -17,6 +17,8 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             console.log("Manage group init");
             $scope.init();   
             $rootScope.activationFlags.tabInit2 = false;
+        }else if (!$rootScope.activationFlags.isLoggedIn){
+            $rootScope.doLogOut();
         }
     });
 
@@ -223,7 +225,7 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
 
         $scope.getMemberName($rootScope.timelineItems[i].student_id).then(function(name){
             taskItem.name = name;
-
+            
             if(!$scope.pushedDates[temp]){
                 $scope.pushedDates[temp] = [];
             }

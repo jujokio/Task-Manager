@@ -2,11 +2,11 @@
     <ion-nav-title>
         <div class="bar-header-divider">
             <div class="bar-header-divider-left">
-                <img class="bar-header-logo" src="img/ionic.png" id="logo"></img>
+                <img class="bar-header-logo" src="img/UBITASKERLOGO1.png" id="logo"></img>
             </div>
             
             <div class="bar-header-divider-center">
-                <h4 class="bar-header-h4">UBITASKER Manage group</h4>
+                <h4 class="bar-header-h4">Logged in as: {{ profileSettings.name }}</h4>
             </div>
 
             <div class="bar-header-divider-right">
@@ -28,7 +28,7 @@
                     </div>
             </h3>
             <ion-list class="list-item" ng-if="expand.members">
-                <ion-item  ng-repeat="member in ownGroup.groupMembers track by $index" class="item-avatar item-list item-icon-right" id="group-list-item7">
+                <ion-item  ng-repeat="member in ownGroup.groupMembers track by $index" class="item-avatar item-list list-names item-icon-right">
                     <ion-item class="item">
                         <div class="display-line">
                             <div class="inline-1">

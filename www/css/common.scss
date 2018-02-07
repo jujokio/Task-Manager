@@ -706,6 +706,13 @@ input[disabled] {
     text-align: -webkit-center;
 }
 
+.list-names {
+    padding-bottom: 0px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-bottom: 1px solid $ApplicationTheme-darkgrey;
+}
+
 .list-short {
     padding-top: 40px;
     padding-bottom: 0px;
