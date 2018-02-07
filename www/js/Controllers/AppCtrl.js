@@ -311,12 +311,17 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Logging in...');
             $rootScope.activationFlags.loading = true;
-            var passhash = CryptoJS.MD5($rootScope.profileSettings.password);
+
+            var encrypted = CryptoJS.AES.encrypt($rootScope.profileSettings.password, password);
+            encrypted = encrypted.toString();
+
+            //var passhash = CryptoJS.MD5($rootScope.profileSettings.password).toString();
+            
             var time = new Date().getTime();
             var cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             var loginJSON = {
                 "email":$rootScope.profileSettings.email,
-                "password":passhash,
+                "password":$rootScope.profileSettings.password,
                 "mac_address": cookie
             }
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
@@ -407,12 +412,16 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Registering...');
             $rootScope.activationFlags.loading = true;
-            var passhash = CryptoJS.MD5($rootScope.userInfo.password);
+            //var passhash = CryptoJS.MD5($rootScope.userInfo.password).toString();
+
+            var encrypted = CryptoJS.AES.encrypt($rootScope.userInfo.password, password);
+            encrypted = encrypted.toString();
+
             var registerJSON = {
                 "student_name":$rootScope.userInfo.studentName,
                 "email":$rootScope.userInfo.email,
                 "student_number":[$rootScope.userInfo.studentNumber],
-                "password":passhash,
+                "password":$rootScope.userInfo.password,
                 "phone_number":[$rootScope.userInfo.phoneNumber]
             }
             $rootScope.askAPI(Settings.Post, "create_user", registerJSON).then(function(response){
