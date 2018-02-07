@@ -142,8 +142,8 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         console.log("Network error: ");
         console.error(response);
         //unauthorized?
-        if(response.data != null && response.data.message != null){
-            if(response.data.ExceptionType == "System.UnauthorizedAccessException" || response.data.ExceptionMessage == "Attempted to perform an unauthorized operation." || ($rootScope.activationFlags.isLoggedIn && response.data.message == "An error has occurred." && response.status == 500)){
+        if(response.data != null){
+            if(response.data.ExceptionType == "System.UnauthorizedAccessException" || response.data.ExceptionMessage == "Attempted to perform an unauthorized operation."){
                 message = "Log out with other devices please."
                 $rootScope.hideWait();
                 deferred.reject(false);
@@ -312,16 +312,16 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             $rootScope.showWait('Logging in...');
             $rootScope.activationFlags.loading = true;
 
-            var encrypted = CryptoJS.AES.encrypt($rootScope.profileSettings.password, password);
-            encrypted = encrypted.toString();
+            //var encrypted = CryptoJS.AES.encrypt($rootScope.profileSettings.password, password);
+            //encrypted = encrypted.toString();
 
-            //var passhash = CryptoJS.MD5($rootScope.profileSettings.password).toString();
+            var passhash = CryptoJS.MD5($rootScope.profileSettings.password).toString();
             
             var time = new Date().getTime();
             var cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
             var loginJSON = {
                 "email":$rootScope.profileSettings.email,
-                "password":$rootScope.profileSettings.password,
+                "password":passhash,
                 "mac_address": cookie
             }
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
@@ -412,16 +412,15 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Registering...');
             $rootScope.activationFlags.loading = true;
-            //var passhash = CryptoJS.MD5($rootScope.userInfo.password).toString();
-
-            var encrypted = CryptoJS.AES.encrypt($rootScope.userInfo.password, password);
-            encrypted = encrypted.toString();
-
+            var passhash = CryptoJS.MD5($rootScope.userInfo.password).toString();
+            var time = new Date().getTime();
+            var cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
+            Restangular.setDefaultHeaders({'X-Api-Key': cookie});
             var registerJSON = {
                 "student_name":$rootScope.userInfo.studentName,
                 "email":$rootScope.userInfo.email,
                 "student_number":[$rootScope.userInfo.studentNumber],
-                "password":$rootScope.userInfo.password,
+                "password":passhash,
                 "phone_number":[$rootScope.userInfo.phoneNumber]
             }
             $rootScope.askAPI(Settings.Post, "create_user", registerJSON).then(function(response){
@@ -430,7 +429,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                 $rootScope.userInfo= {};
                 $rootScope.hideWait();
                 $rootScope.activationFlags.loading = false;
-                $rootScope.goToState('Login');
+                $rootScope.doLogOut();
             });
         }else{
             console.log("I'm busy as a bee!");

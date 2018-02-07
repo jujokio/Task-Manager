@@ -289,10 +289,10 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                             data: [0, 0, 0]
                         }];
                 }
-                $scope.getMemberName($rootScope.ownGroup.groupMembers, dataset).then(function(names){
+                $scope.getMemberName($rootScope.ownGroup.groupMembers).then(function(names){
                     if(names != null){
                         $rootScope.ownGroup.groupMembers.nameList = names;
-                        $scope.createOwnChart($rootScope.ownGroup.groupMembers.nameList, ).then(function(){
+                        $scope.createOwnChart($rootScope.ownGroup.groupMembers.nameList, dataset).then(function(){
 
                             $rootScope.askAPI(Settings.Post, "fetch_group_stats", {}).then(function(response){
                                 if(response != null){
