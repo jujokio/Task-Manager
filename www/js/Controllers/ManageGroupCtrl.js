@@ -301,7 +301,7 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     * @param {Object} member member json
     */
     $scope.showGroupMemberData = function(member){
-        var text = "Email: "+ member.email + "<br/>Number: " + member.phone_number;
+        var text = "Email: "+ member.email + "<br/>Phone number: " + member.phone_number;
         $rootScope.showDeferredAlert(member.Name,text).then(function(){
             return;
         });

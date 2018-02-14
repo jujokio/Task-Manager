@@ -1,0 +1,38 @@
+<h1><code ng:non-bindable="">StatisticsCtrl</code>
+<div><span class="hint"></span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="statisticsctrl-page"><p>Controls AddTask.html
+Calls AppCtrl.js if needed</p>
+<p>Display own goup&#39;s statistics. Stats are divided in categories and displayed for every group member.
+Display every other groups total work hours</p>
+</div></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_createotherchart">createOtherChart()</h3>
+<div class="createotherchart"><div class="createotherchart-page"><p>do charts for other groups</p>
+</div></div>
+</li>
+<li><h3 id="methods_createownchart">createOwnChart(memberlist, series)</h3>
+<div class="createownchart"><div class="createownchart-page"><p>do charts for own group
+X-axis: Member names, Y-axis: workhours
+Member names are in same order as workhours &quot;a&quot; did X hours in &quot;Coding&quot;
+Is deferred no reject</p>
+</div><h5 id="methods_createownchart_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>memberlist</td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="createownchart-page"><p>list of groupmember names [&quot;a&quot;,&quot;b&quot;,...]</p>
+</div></td></tr><tr><td>series</td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="createownchart-page"><p>list of workhours [{&quot;name&quot;:&quot;Coding&quot;, &quot;data&quot;:X},{&quot;name&quot;:&quot;coding&quot;, &quot;data&quot;:Y},... ]</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_getmembername">getMemberName()</h3>
+<div class="getmembername"><div class="getmembername-page"><p>Display group member&#39;s name
+Is deferred, no rejects</p>
+</div><h5 id="methods_getmembername_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="getmembername-page"><p>array of names</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_init">init()</h3>
+<div class="init"><div class="init-page"><p>init, fired every time when browsed to the Statistics tab
+Calls askAPI()</p>
+</div></div>
+</li>
+</ul>
+</div>
+</div>

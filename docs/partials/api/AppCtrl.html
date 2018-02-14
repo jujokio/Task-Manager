@@ -1,0 +1,134 @@
+<h1><code ng:non-bindable="">AppCtrl</code>
+<div><span class="hint"></span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="appctrl-page"><p>App controller. Holds all $rootScope functions
+$rootScope.profileSettings = user&#39;s internet settings, name, waterwork. Stored in IDB &#39;settings&#39;-table
+References:  logout.png <a href="https://commons.wikimedia.org/wiki/File:Logout.svg">https://commons.wikimedia.org/wiki/File:Logout.svg</a></p>
+<p>Called by:
+AddTaskCtrl.js
+ManageGroupCtrl.js
+StatisticsCtrl.js</p>
+<p>HTMLpages used:
+AddTask.html
+JoinGroup.html
+Login.html
+ManageGroup.html
+NewUser.html
+Statistics.html
+Tabs.html</p>
+</div></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_askapi">askAPI(command, apiUrl, payloadJSON)</h3>
+<div class="askapi"><div class="askapi-page"><p>Send API requests
+Calls checkServerResponseStatus() if error
+Is deferred</p>
+</div><h5 id="methods_askapi_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>command</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="askapi-page"><p>API request method</p>
+</div></td></tr><tr><td>apiUrl</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="askapi-page"><p>Url for request</p>
+</div></td></tr><tr><td>payloadJSON</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="askapi-page"><p>JSON for request</p>
+</div></td></tr></tbody></table><h5 id="methods_askapi_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="askapi-page"><p>server response</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_checkserverresponsestatus">checkServerResponseStatus(response)</h3>
+<div class="checkserverresponsestatus"><div class="checkserverresponsestatus-page"><p>Check server response status and message on error. Displays status and message in dialog.
+Calls checkConnection()
+Is deferred</p>
+</div><h5 id="methods_checkserverresponsestatus_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>response</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="checkserverresponsestatus-page"><p>Server response object</p>
+</div></td></tr></tbody></table><h5 id="methods_checkserverresponsestatus_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="checkserverresponsestatus-page"><p>true if connection is available.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_docreategroup">doCreateGroup()</h3>
+<div class="docreategroup"><div class="docreategroup-page"><p>Join in one group
+Calls askAPI(), goToState()</p>
+</div></div>
+</li>
+<li><h3 id="methods_dojoingroup">doJoinGroup(groupID)</h3>
+<div class="dojoingroup"><div class="dojoingroup-page"><p>Join in one group
+Calls askAPI(), goToState()</p>
+</div><h5 id="methods_dojoingroup_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>groupID</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="dojoingroup-page"><p>ID of the group in question</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_dologout">doLogOut()</h3>
+<div class="dologout"><div class="dologout-page"><p>Do log out
+calls askAPI() goToState()
+Is deferred</p>
+</div></div>
+</li>
+<li><h3 id="methods_dologin">doLogin()</h3>
+<div class="dologin"><div class="dologin-page"><p>do log in
+Calls askAPI(), goToState()
+If group Id is null, next state is &#39;joinGroup&#39;.</p>
+</div></div>
+</li>
+<li><h3 id="methods_doregister">doRegister()</h3>
+<div class="doregister"><div class="doregister-page"><p>Register new user
+Calls askAPI()</p>
+</div></div>
+</li>
+<li><h3 id="methods_gotostate">goToState(stateName)</h3>
+<div class="gotostate"><div class="gotostate-page"><p>Change state</p>
+</div><h5 id="methods_gotostate_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>stateName</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="gotostate-page"><p>State name as described in app.js</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_greetings">greetings()</h3>
+<div class="greetings"><div class="greetings-page"><p>Show greetings dialog for user with user name displayed.
+Message changes overtime.
+Is deferred, No reject</p>
+</div></div>
+</li>
+<li><h3 id="methods_hidewait">hideWait()</h3>
+<div class="hidewait"><div class="hidewait-page"><p>Hide ionic loading spinner
+disapled if $rootScope.activationFlags.sendoffline == true.</p>
+</div></div>
+</li>
+<li><h3 id="methods_initjoingroup">initJoinGroup()</h3>
+<div class="initjoingroup"><div class="initjoingroup-page"><p>Show pop up with given title and text.</p>
+</div></div>
+</li>
+<li><h3 id="methods_inittab">initTab(tabId)</h3>
+<div class="inittab"><div class="inittab-page"><p>Fire watchers when changing tab</p>
+</div><h5 id="methods_inittab_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>tabId</td><td><a href="" class="label type-hint type-hint-number">Number</a></td><td><div class="inittab-page"><p>id of tab clicked.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_ready">ready()</h3>
+<div class="ready"><div class="ready-page"><p>When the device is ready
+Calls init()</p>
+</div></div>
+</li>
+<li><h3 id="methods_showdeferredalert">showDeferredAlert(title, text, subTitle)</h3>
+<div class="showdeferredalert"><div class="showdeferredalert-page"><p>Show pop up with given title and text.
+Is deferred, No reject</p>
+</div><h5 id="methods_showdeferredalert_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>title</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showdeferredalert-page"><p>title.</p>
+</div></td></tr><tr><td>text</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showdeferredalert-page"><p>text</p>
+</div></td></tr><tr><td>subTitle</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showdeferredalert-page"><p>title.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_showdeferredpopup">showDeferredPopup(title, text, subTitle)</h3>
+<div class="showdeferredpopup"><div class="showdeferredpopup-page"><p>Show popup with given title and text.
+Is deferred, No reject</p>
+</div><h5 id="methods_showdeferredpopup_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>title</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showdeferredpopup-page"><p>title.</p>
+</div></td></tr><tr><td>text</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showdeferredpopup-page"><p>text</p>
+</div></td></tr><tr><td>subTitle</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showdeferredpopup-page"><p>subtitle.</p>
+</div></td></tr></tbody></table><h5 id="methods_showdeferredpopup_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="showdeferredpopup-page"><p>Yes/No -&gt; true/false</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_showwait">showWait(text)</h3>
+<div class="showwait"><div class="showwait-page"><p>Show ionic loading spinner with message. appears after delay (250ms)
+Disabled if $rootScope.activationFlags.sendOffline == true</p>
+</div><h5 id="methods_showwait_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>text</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="showwait-page"><p>show this text</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_updateselectedgroup">updateSelectedGroup(group)</h3>
+<div class="updateselectedgroup"><div class="updateselectedgroup-page"><p>assign selected group, and update the variable</p>
+</div><h5 id="methods_updateselectedgroup_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>group</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="updateselectedgroup-page"><p>Group-object to assign</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_validateregister">validateRegister()</h3>
+<div class="validateregister"><div class="validateregister-page"><p>is the registration JSON valid</p>
+</div><h5 id="methods_validateregister_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="validateregister-page"><p>true/false</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>

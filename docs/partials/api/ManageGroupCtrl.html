@@ -1,0 +1,67 @@
+<h1><code ng:non-bindable="">ManageGroupCtrl</code>
+<div><span class="hint"></span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="managegroupctrl-page"><p>Controls ManageGroup.html
+Calls AppCtrl.js if needed</p>
+<p>Display your own group members and option to leave your group.</p>
+<p>Display group&#39;s timeline</p>
+</div></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_addupvote">addUpvote(item)</h3>
+<div class="addupvote"><div class="addupvote-page"><p>upvote a single task.
+Calls askAPI()</p>
+</div><h5 id="methods_addupvote_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>item</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="addupvote-page"><p>task in hand.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_displaydate">displayDate(timestamp)</h3>
+<div class="displaydate"><div class="displaydate-page"><p>Display date in string.</p>
+</div><h5 id="methods_displaydate_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>timestamp</td><td><a href="" class="label type-hint type-hint-date">Date</a></td><td><div class="displaydate-page"><p>timestamp of the date</p>
+</div></td></tr></tbody></table><h5 id="methods_displaydate_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="displaydate-page"><p>day.month</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_displaytime">displayTime(timestamp)</h3>
+<div class="displaytime"><div class="displaytime-page"><p>Display time in string.</p>
+</div><h5 id="methods_displaytime_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>timestamp</td><td><a href="" class="label type-hint type-hint-date">Date</a></td><td><div class="displaytime-page"><p>timestamp of the date</p>
+</div></td></tr></tbody></table><h5 id="methods_displaytime_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="displaytime-page"><p>(h)h.mm</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_displaytimelinebody">displayTimelineBody(item)</h3>
+<div class="displaytimelinebody"><div class="displaytimelinebody-page"><p>Get displayable string of task for timeline body </p>
+</div><h5 id="methods_displaytimelinebody_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>item</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="displaytimelinebody-page"><p>task at hand</p>
+</div></td></tr></tbody></table><h5 id="methods_displaytimelinebody_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="displaytimelinebody-page"><p>text for body</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_getmembername">getMemberName(id)</h3>
+<div class="getmembername"><div class="getmembername-page"><p>Display group member&#39;s name
+Is deferred, no rejects</p>
+</div><h5 id="methods_getmembername_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>id</td><td><a href="" class="label type-hint type-hint-number">Number</a></td><td><div class="getmembername-page"><p>member&#39;s id#</p>
+</div></td></tr></tbody></table><h5 id="methods_getmembername_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="getmembername-page"><p>name or just id if no name was found.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_init">init()</h3>
+<div class="init"><div class="init-page"><p>init, fired every time when browsed to the manageGroup tab
+Calls askAPI(), initTimeline()</p>
+</div></div>
+</li>
+<li><h3 id="methods_inittimeline">initTimeline(temp, taskItem)</h3>
+<div class="inittimeline"><div class="inittimeline-page"><p>init timeline items, part of init().
+Group each task for specific date.</p>
+</div><h5 id="methods_inittimeline_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>temp</td><td><a href="" class="label type-hint type-hint-date">Date</a></td><td><div class="inittimeline-page"><p>tasks are grouped by date</p>
+</div></td></tr><tr><td>taskItem</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="inittimeline-page"><p>task at hand</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_leavegroup">leaveGroup()</h3>
+<div class="leavegroup"><div class="leavegroup-page"><p>Leave your group permanently
+Calls askAPI()</p>
+</div></div>
+</li>
+<li><h3 id="methods_showgroupmemberdata">showGroupMemberData(member)</h3>
+<div class="showgroupmemberdata"><div class="showgroupmemberdata-page"><p>Display user name and phonenumber if one is provided.</p>
+</div><h5 id="methods_showgroupmemberdata_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>member</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="showgroupmemberdata-page"><p>member json</p>
+</div></td></tr></tbody></table></div>
+</li>
+</ul>
+</div>
+</div>

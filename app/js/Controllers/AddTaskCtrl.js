@@ -1,6 +1,17 @@
 
 
 
+/**
+ * @ngdoc controller
+ * @name AddTaskCtrl
+ * @description 
+ * Controls AddTask.html
+ * Calls AppCtrl.js if needed
+ * 
+ * 
+ * Add task 
+ * 
+ */
 
 angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope) {
   // With the new view caching in Ionic, Controllers are only called

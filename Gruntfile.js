@@ -80,6 +80,12 @@ module.exports = function (grunt) {
         tasks: ['ngconstant:development', 'newer:copy:app']
       }
     },
+    ngdocs: {
+      all: ['app/js/*.js', 'app/js/controllers/*.js'],
+      options: {
+        dest: 'docs'
+      }
+    },
 
     // The actual grunt server settings
     connect: {
@@ -553,6 +559,7 @@ module.exports = function (grunt) {
     ['karma:continuous',
     'connect:coverage:keepalive'
   ]);
+  
 
   grunt.registerTask('default', [
     'wiredep',
@@ -560,4 +567,5 @@ module.exports = function (grunt) {
     'karma:continuous',
     'compress'
   ]);
+  grunt.loadNpmTasks('grunt-ngdocs');
 };

@@ -64,21 +64,21 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
 
 
     
-        // watch activationFlags.tabInit and do init if changed
-        $scope.$watch('activationFlags.tabInit3', function() {
-            if($rootScope.activationFlags.tabInit3){
-                console.log("stats init");
-                $scope.init();
-                $rootScope.activationFlags.tabInit3 = false;
-            }
-            else if (!$rootScope.activationFlags.isLoggedIn){
-                $rootScope.doLogOut();
-            }
-        });
+    // watch activationFlags.tabInit and do init if changed
+    $scope.$watch('activationFlags.tabInit3', function() {
+        if($rootScope.activationFlags.tabInit3){
+            console.log("stats init");
+            $scope.init();
+            $rootScope.activationFlags.tabInit3 = false;
+        }
+        else if (!$rootScope.activationFlags.isLoggedIn){
+            $rootScope.doLogOut();
+        }
+    });
 
 
         
-        /**
+    /**
     * @ngdoc method
     * @name createOtherChart
     * @methodOf StatisticsCtrl
@@ -273,25 +273,30 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                 $rootScope.ownGroup.groupMembers = response.members;
                 var dataset = [];
                 if (response.series){
-                    dataset = seies;
+                    dataset = response.series;
                 }else{
+                    var formatedSerie = [];
+                    for(a=0;a<response.members.length;a++){
+                        formatedSerie.push(0);
+                    }
                     dataset = [{
                             name: 'Design',
-                            data: [0, 0, 0]
+                            data: formatedSerie
                         }, {
                             name: 'Coding',
-                            data: [0, 0, 0]
+                            data: formatedSerie
                         }, {
                             name: 'Presentation',
-                            data: [0, 0, 0]
+                            data: formatedSerie
                         }, {
                             name: 'Other',
-                            data: [0, 0, 0]
+                            data: formatedSerie
                         }];
                 }
                 $scope.getMemberName($rootScope.ownGroup.groupMembers).then(function(names){
                     if(names != null){
                         $rootScope.ownGroup.groupMembers.nameList = names;
+                        
                         $scope.createOwnChart($rootScope.ownGroup.groupMembers.nameList, dataset).then(function(){
 
                             $rootScope.askAPI(Settings.Post, "fetch_group_stats", {}).then(function(response){
@@ -322,32 +327,6 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
         });
         return deferred.promise;
     } 
-
-
-    $scope.lol = function(result){
-        categories=[]
-        series=[]
-        result.members.forEach(function(item,index){
-            categories.push(item.name)
-            student_id=item.id;
-            student_task = $.grep(result.task_entries,function(e){
-                return e.student_id==student_id;
-            });
-            series_data={}
-            student_task_hours=0;
-            student_task.forEach(function(tItem,Iindex){
-                if(!series_data.hasOwnProperty(tItem.task_type)){
-                    series_data[tItem.task_type]=[];
-                }
-                series_data[tItem.task_type].push(student_task_hours)
-            });
-		
-	    });
-    }
-
-
-
-
 
   
   });

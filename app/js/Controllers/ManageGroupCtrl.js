@@ -1,7 +1,19 @@
 
 
 
-
+/**
+ * @ngdoc controller
+ * @name ManageGroupCtrl
+ * @description 
+ * Controls ManageGroup.html
+ * Calls AppCtrl.js if needed
+ * 
+ * 
+ * Display your own group members and option to leave your group.
+ * 
+ * Display group's timeline
+ * 
+ */
 angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $rootScope) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -301,7 +313,7 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     * @param {Object} member member json
     */
     $scope.showGroupMemberData = function(member){
-        var text = "Email: "+ member.email + "<br/>Number: " + member.phone_number;
+        var text = "Email: "+ member.email + "<br/>Phone number: " + member.phone_number;
         $rootScope.showDeferredAlert(member.Name,text).then(function(){
             return;
         });
