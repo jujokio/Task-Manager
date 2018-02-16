@@ -288,11 +288,14 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                 if (response.series){
                     dataset = response.series;
                 }else{
-                    var formatedSerie1 = [];
-                    var formatedSerie2 = [];
-                    var formatedSerie3 = [];
-                    var formatedSerie4 = [];
+                    var formatedSerie = [];
+                    //var formatedSerie1 = [];
+                    //var formatedSerie2 = [];
+                    //var formatedSerie3 = [];
+                    //var formatedSerie4 = [];
                     for(a=0;a<response.members.length;a++){
+                        formatedSerie.push(0);
+                        /*
                         temp = Math.floor(Math.random() * 11);
                         formatedSerie1.push(temp);
                         temp = Math.floor(Math.random() * 21);
@@ -301,19 +304,20 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                         formatedSerie3.push(temp);
                         temp = Math.floor(Math.random() * 11);
                         formatedSerie4.push(temp);
+                        */
                     }
                     dataset = [{
                             name: 'Design',
-                            data: formatedSerie1
+                            data: formatedSerie
                         }, {
                             name: 'Coding',
-                            data: formatedSerie2
+                            data: formatedSerie
                         }, {
                             name: 'Presentation',
-                            data: formatedSerie3
+                            data: formatedSerie
                         }, {
                             name: 'Other',
-                            data: formatedSerie4
+                            data: formatedSerie
                         }];
                 }
                 $scope.getMemberName($rootScope.ownGroup.groupMembers).then(function(names){
