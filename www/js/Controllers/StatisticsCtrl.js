@@ -52,7 +52,18 @@
 
 */
 
-
+/**
+ * @ngdoc controller
+ * @name StatisticsCtrl
+ * @description 
+ * Controls AddTask.html
+ * Calls AppCtrl.js if needed
+ * 
+ * 
+ * Display own goup's statistics. Stats are divided in categories and displayed for every group member.
+ * Display every other groups total work hours
+ * 
+ */
 angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, $scope, $state) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -95,7 +106,7 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                 type: 'column'
             },
             title: {
-                text: 'Total work hours'
+                text: ''
             },
             xAxis: {
                 categories: memberlist
@@ -103,7 +114,7 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Total work hours'
+                    text: 'workhours (h)'
                 },
                 stackLabels: {
                     enabled: true,
@@ -218,6 +229,7 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
             series: series
         });
         deferred.resolve();
+
         return deferred.promise;
     }
 
@@ -269,28 +281,39 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
         $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
             if(response != null){
                 console.log("group refreshed");
+                $rootScope.ownGroup.group_id = response.group.group_id
                 $rootScope.ownGroup.group = response.group;
                 $rootScope.ownGroup.groupMembers = response.members;
                 var dataset = [];
                 if (response.series){
                     dataset = response.series;
                 }else{
-                    var formatedSerie = [];
+                    var formatedSerie1 = [];
+                    var formatedSerie2 = [];
+                    var formatedSerie3 = [];
+                    var formatedSerie4 = [];
                     for(a=0;a<response.members.length;a++){
-                        formatedSerie.push(0);
+                        temp = Math.floor(Math.random() * 11);
+                        formatedSerie1.push(temp);
+                        temp = Math.floor(Math.random() * 21);
+                        formatedSerie2.push(temp);
+                        temp = Math.floor(Math.random() * 11);
+                        formatedSerie3.push(temp);
+                        temp = Math.floor(Math.random() * 11);
+                        formatedSerie4.push(temp);
                     }
                     dataset = [{
                             name: 'Design',
-                            data: formatedSerie
+                            data: formatedSerie1
                         }, {
                             name: 'Coding',
-                            data: formatedSerie
+                            data: formatedSerie2
                         }, {
                             name: 'Presentation',
-                            data: formatedSerie
+                            data: formatedSerie3
                         }, {
                             name: 'Other',
-                            data: formatedSerie
+                            data: formatedSerie4
                         }];
                 }
                 $scope.getMemberName($rootScope.ownGroup.groupMembers).then(function(names){
@@ -304,7 +327,10 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                                     var groupNames = [];
                                     var groupHours = [];
                                     for (i=0; i<response.length;i++){ 
-                                          if (response[i].group_id != $rootScope.profileSettings.group_id){
+                                        if (response[i].group_id == $rootScope.ownGroup.group_id){
+                                            groupNames.unshift(response[i].name);
+                                            groupHours.unshift(response[i].total_work_hours);
+                                        }else{
                                             groupNames.push(response[i].name);
                                             groupHours.push(response[i].total_work_hours);
                                         }

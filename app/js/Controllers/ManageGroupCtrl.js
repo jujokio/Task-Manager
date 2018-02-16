@@ -60,11 +60,11 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             $rootScope.askAPI(Settings.Post, "vote_task", voteJSON).then(function(response){
                 if(response != null){
                     if(!item.liked){
-                        item.likes++;
+                        item.vote_count++;
                         item.liked = true;
                     }
                     else{
-                        item.likes--;
+                        item.vote_count--;
                         item.liked = false;
                     }
 
@@ -200,19 +200,21 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
                         for(i = 0; i < $rootScope.timelineItems.length; i++){
                             var taskItem = $rootScope.timelineItems[i]
                             var temp = $scope.displayDate(taskItem.task_added_timestamp);
-                            if(taskItem.likes == null){
-                                taskItem.likes = 0;
+                            if(taskItem.vote_count == null){
+                                taskItem.vote_count = 0;
                             }
                             $scope.initTimeline(temp, taskItem).then(function(){
-
+                                
                             });
                         }
+                      //  $scope.sortPushedDates().then(function(){
+                            $rootScope.hideWait();
+                            console.log("pushed dates is finally");
+                            console.log($scope.pushedDates);
+                            deferred.resolve();
+                       // });
                     }
                 }
-                $rootScope.hideWait();
-                console.log("pushed dates is finally");
-                console.log($scope.pushedDates);
-                deferred.resolve();
             });
         }
         return deferred.promise;
@@ -318,6 +320,33 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             return;
         });
     } 
+
+
+
+    $scope.sortPushedDates = function(){
+        var deferred = $q.defer();
+        var arr = $scope.pushedDates;
+        var len = arr.length;
+        for (var l = len-1; l>=0; l--){
+            for(var m = 1; m<=i; m++){
+                console.log(arr[m-1].task_added_timestamp);
+                console.log(arr[m].task_added_timestamp)
+                if(arr[m-1].task_added_timestamp > arr[m].task_added_timestamp){
+                    console.log("sortting?");
+                    var temp = arr[m-1];
+                    arr[m-1] = arr[m];
+                    arr[m] = temp;
+                 }
+              }
+            }
+            console.log($scope.pushedDates);
+            console.log("sorted");
+            console.log(arr);
+            $scope.pushedDates=arr;
+        deferred.resolve();
+        return deferred.promise;
+
+    }
 
   
   });

@@ -1,8 +1,31 @@
 
+/**
+ * @ngdoc controller
+ * @name AppCtrl
+ * @description 
+ * App controller. Holds all $rootScope functions
+ * $rootScope.profileSettings = user's internet settings, name, waterwork. Stored in IDB 'settings'-table
+ * References:  logout.png https://commons.wikimedia.org/wiki/File:Logout.svg
+ * 
+ * 
+ * Called by:
+ * AddTaskCtrl.js
+ * ManageGroupCtrl.js
+ * StatisticsCtrl.js
+ * 
+ * 
+ * HTMLpages used:
+ * AddTask.html
+ * JoinGroup.html
+ * Login.html
+ * ManageGroup.html
+ * NewUser.html
+ * Statistics.html
+ * Tabs.html
+ * 
+ */
 
-/*References:
-    logout.png https://commons.wikimedia.org/wiki/File:Logout.svg
-    
+/*
 */
 angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDelegate, $ionicLoading, $ionicModal, $ionicPlatform, $ionicPopup, $q, Restangular, $rootScope, $scope, $state, $timeout, $window) {
     // With the new view caching in Ionic, Controllers are only called
