@@ -272,6 +272,7 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
     */
     $scope.init = function(){
         var deferred = $q.defer();
+        $scope.allowedToSeeOthers = false;
         $rootScope.showWait("Loading group data...");
         $scope.groups = {};
 
@@ -284,6 +285,10 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                 $rootScope.ownGroup.group_id = response.group.group_id
                 $rootScope.ownGroup.group = response.group;
                 $rootScope.ownGroup.groupMembers = response.members;
+
+                if(response.group.group_id % 2 != 0) {
+                    $scope.allowedToSeeOthers = true;
+                }
                 var dataset = [];
                 if (response.series){
                     dataset = response.series;
@@ -325,7 +330,6 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                         $rootScope.ownGroup.groupMembers.nameList = names;
                         
                         $scope.createOwnChart($rootScope.ownGroup.groupMembers.nameList, dataset).then(function(){
-
                             $rootScope.askAPI(Settings.Post, "fetch_group_stats", {}).then(function(response){
                                 if(response != null){
                                     var groupNames = [];
@@ -341,10 +345,22 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                                     }
                                     $scope.groups.names = groupNames;
                                     $scope.groups.total_work_hours = groupHours;
-                                    $scope.createOtherChart($scope.groups.names, $scope.groups.total_work_hours).then(function(){
+
+                                    if($scope.allowedToSeeOthers){
+                                        $scope.createOtherChart($scope.groups.names, $scope.groups.total_work_hours).then(function(){
+                                            fetchJSON = {
+                                                "email":$rootScope.profileSettings.email
+                                            }
+                                            $rootScope.askAPI(Settings.Post, "fetch_user_group_detailed_data", fetchJSON).then(function(response){
+                                                console.log(response);
+                                                $rootScope.hideWait();
+                                                deferred.resolve();
+                                            });
+                                        });
+                                    }else{
                                         $rootScope.hideWait();
                                         deferred.resolve();
-                                    });
+                                    }
                                 } 
                             });
                         
