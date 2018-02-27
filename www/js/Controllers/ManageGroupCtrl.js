@@ -188,12 +188,12 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             var fetchJSON = {
                 "email":$rootScope.profileSettings.email
             }
-            $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
+            $rootScope.askAPI(Settings.Post, "fetch_user_group_detailed_data", fetchJSON).then(function(response){
                 if(response != null){
                     $rootScope.ownGroup.group = response.group;
                     $rootScope.profileSettings.group_id = response.group.group_id;
                     $rootScope.ownGroup.groupMembers = response.members;
-                    $rootScope.timelineItems = response.last_8_days_task_entries;
+                    $rootScope.timelineItems = response.task_entries;
                     $scope.pushedDates = {};
 
                     if($rootScope.timelineItems.length > 0 ){

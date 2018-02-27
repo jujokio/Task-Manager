@@ -32,8 +32,6 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
       // watch activationFlags.tabInit and do init if changed
     $scope.$watch('activationFlags.tabInit1', function() {
         if($rootScope.activationFlags.tabInit1){
-            console.log("task init");
-            
             $scope.Task = {};
             $scope.Task.duration = 0;
             $rootScope.activationFlags.tabInit1 = false;
@@ -55,7 +53,6 @@ angular.module('starter').controller('AddTaskCtrl', function($scope, $rootScope)
     * 
     */
     $scope.displayEnum = function (num){
-        console.log("display enum");
         return $scope.Categories[num];
     };
 

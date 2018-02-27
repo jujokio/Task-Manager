@@ -106,7 +106,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         var deferred = $q.defer();
         if(command == Settings.Post){
             var startTime = new Date().getTime();
-            Restangular.all(apiUrl).post(payloadJSON).then(function(response) {
+            Restangular.all(apiUrl).withHttpConfig({ timeout: 50000 }).post(payloadJSON).then(function(response) {
                 deferred.resolve(response);
 
                 },function(err){//Rest Post
@@ -119,7 +119,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             });
         }else if(command == Settings.Get){
             var startTime = new Date().getTime();
-            Restangular.one(apiUrl).get(payloadJSON).then(function(response) {
+            Restangular.one(apiUrl).withHttpConfig({ timeout: 5000 }).get(payloadJSON).then(function(response) {
                 deferred.resolve(response);
 
                 },function(err){//Rest Get

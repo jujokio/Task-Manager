@@ -17,23 +17,19 @@ angular.module('starter').controller('LoginCtrl', function($q, $scope, $rootScop
              
 
         $scope.doLogin = function (){
-            console.log("login");
-            var time = new Date().getTime();
-            
+
+            var time = new Date().getTime();         
             $rootScope.cookie = Cookies.set('TaskManagerCookie', time, { expires: 2 });
-            console.log("cookie");
             var loginJSON = {
                 "email":$scope.loginInfo.email,
                 "password":$scope.loginInfo.password,
                 "mac_address": $rootScope.cookie
             }
-            console.log("ask");
+
             $rootScope.askAPI(Settings.Post, "login", loginJSON).then(function(response){
                 $rootScope.loggedUser = angular.copy($scope.loginInfo);
                 $rootScope.activationFlags.isLoggedIn = true;
                 $scope.loginInfo= {};
-                console.log("login with:");
-                console.log(loginJSON.email);
                 $rootScope.goToState('tab.AddTask');
 
             });
@@ -44,7 +40,6 @@ angular.module('starter').controller('LoginCtrl', function($q, $scope, $rootScop
 
 
         $scope.goToNewUser = function (){
-            console.log("go to new user");
             $rootScope.goToState('NewUser');
             $scope.loginInfo= {};
         };

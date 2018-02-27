@@ -26,7 +26,6 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
     // watch activationFlags.tabInit and do init if changed
     $scope.$watch('activationFlags.tabInit2', function() {
         if($rootScope.activationFlags.tabInit2){
-            console.log("Manage group init");
             $scope.init();   
             $rootScope.activationFlags.tabInit2 = false;
         }else if (!$rootScope.activationFlags.isLoggedIn){
@@ -188,12 +187,12 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
             var fetchJSON = {
                 "email":$rootScope.profileSettings.email
             }
-            $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
+            $rootScope.askAPI(Settings.Post, "fetch_user_group_detailed_data", fetchJSON).then(function(response){
                 if(response != null){
                     $rootScope.ownGroup.group = response.group;
                     $rootScope.profileSettings.group_id = response.group.group_id;
                     $rootScope.ownGroup.groupMembers = response.members;
-                    $rootScope.timelineItems = response.last_8_days_task_entries;
+                    $rootScope.timelineItems = response.task_entries;
                     $scope.pushedDates = {};
 
                     if($rootScope.timelineItems.length > 0 ){
@@ -209,8 +208,6 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
                         }
                       //  $scope.sortPushedDates().then(function(){
                             $rootScope.hideWait();
-                            console.log("pushed dates is finally");
-                            console.log($scope.pushedDates);
                             deferred.resolve();
                        // });
                     }
@@ -329,19 +326,13 @@ angular.module('starter').controller('ManageGroupCtrl', function($q, $scope, $ro
         var len = arr.length;
         for (var l = len-1; l>=0; l--){
             for(var m = 1; m<=i; m++){
-                console.log(arr[m-1].task_added_timestamp);
-                console.log(arr[m].task_added_timestamp)
                 if(arr[m-1].task_added_timestamp > arr[m].task_added_timestamp){
-                    console.log("sortting?");
                     var temp = arr[m-1];
                     arr[m-1] = arr[m];
                     arr[m] = temp;
                  }
               }
             }
-            console.log($scope.pushedDates);
-            console.log("sorted");
-            console.log(arr);
             $scope.pushedDates=arr;
         deferred.resolve();
         return deferred.promise;

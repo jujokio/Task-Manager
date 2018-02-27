@@ -78,7 +78,6 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
     // watch activationFlags.tabInit and do init if changed
     $scope.$watch('activationFlags.tabInit3', function() {
         if($rootScope.activationFlags.tabInit3){
-            console.log("stats init");
             $scope.init();
             $rootScope.activationFlags.tabInit3 = false;
         }
@@ -100,7 +99,6 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
     $scope.createOtherChart = function (memberlist, worklist){
         var deferred = $q.defer();
         var container =  $(".item #container2");
-        console.log(memberlist);
         Highcharts.chart(container[0], {
             chart: {
                 type: 'column'
@@ -177,7 +175,6 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
     $scope.createOwnChart = function (memberlist, series){
         var deferred = $q.defer();
         var container =  $(".item #container");
-        console.log(memberlist);
         Highcharts.chart(container[0], {
             chart: {
                 type: 'column'
@@ -186,7 +183,7 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                 text: 'Total work hours'
             },
             xAxis: {
-                categories: memberlist
+                categories: ["Design","Coding","Presentation","Other"]
             },
             yAxis: {
                 min: 0,
@@ -235,6 +232,56 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
 
 
 
+        /**
+    * @ngdoc method
+    * @name formatChartData
+    * @methodOf StatisticsCtrl
+    * @description
+    * Format the received task entries for the ownChart
+    * 
+    * @param {Array} series list of workhours [{"name":"Coding", "data":X},{"name":"coding", "data":Y},... ]
+    */
+   $scope.formatChartData = function (series){
+    var deferred = $q.defer();
+    var dataset = [];
+
+    for (l=0;l<$rootScope.ownGroup.groupMembers.length;l++){
+        var memberName = $rootScope.ownGroup.groupMembers[l].name
+        var formatedData = [0,0,0,0];
+        for (k=0; k<series.length; k++){
+                var taskType = series[k].task_type;
+                var value = series[k].hours;
+                if(memberName ==  series[k].name){
+                    
+                    var singleData = {
+                        "name":memberName,
+                        "data":value
+                    }
+                    if (taskType == "Design"){
+                        formatedData[0] = value
+                    }else if (taskType == "Coding"){
+                        formatedData[1] = value;
+                    }else if (taskType == "Presentation"){
+                        formatedData[2] = value;
+                    }else if (taskType == "Other"){
+                        formatedData[3] = value;
+                    }else{
+                        console.log(singleData);
+                    }
+                }
+            }
+            var singleMember = {
+                 name: memberName,
+                data: formatedData
+            }
+            dataset.push(singleMember);
+    }
+    deferred.resolve(dataset);
+
+    return deferred.promise;
+}
+
+
     /**
     * @ngdoc method
     * @name getMemberName
@@ -279,9 +326,8 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
         fetchJSON = {
             "email":$rootScope.profileSettings.email
         }
-        $rootScope.askAPI(Settings.Post, "fetch_user_group_data", fetchJSON).then(function(response){
+        $rootScope.askAPI(Settings.Post, "fetch_user_group_detailed_data", fetchJSON).then(function(response){
             if(response != null){
-                console.log("group refreshed");
                 $rootScope.ownGroup.group_id = response.group.group_id
                 $rootScope.ownGroup.group = response.group;
                 $rootScope.ownGroup.groupMembers = response.members;
@@ -290,45 +336,24 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                     $scope.allowedToSeeOthers = true;
                 }
                 var dataset = [];
-                if (response.series){
-                    dataset = response.series;
+                if (response.formated_tasks != null){
+                    
+                    $scope.formatChartData(response.formated_tasks).then(function(data){
+                        dataset = data;
+                    });
                 }else{
                     var formatedSerie = [];
-                    //var formatedSerie1 = [];
-                    //var formatedSerie2 = [];
-                    //var formatedSerie3 = [];
-                    //var formatedSerie4 = [];
                     for(a=0;a<response.members.length;a++){
-                        formatedSerie.push(0);
-                        /*
-                        temp = Math.floor(Math.random() * 11);
-                        formatedSerie1.push(temp);
-                        temp = Math.floor(Math.random() * 21);
-                        formatedSerie2.push(temp);
-                        temp = Math.floor(Math.random() * 11);
-                        formatedSerie3.push(temp);
-                        temp = Math.floor(Math.random() * 11);
-                        formatedSerie4.push(temp);
-                        */
+                        var singledata = {
+                            name: response.members[a].name,
+                            data: 0
+                        }
+                        dataset.push(singledata);
                     }
-                    dataset = [{
-                            name: 'Design',
-                            data: formatedSerie
-                        }, {
-                            name: 'Coding',
-                            data: formatedSerie
-                        }, {
-                            name: 'Presentation',
-                            data: formatedSerie
-                        }, {
-                            name: 'Other',
-                            data: formatedSerie
-                        }];
                 }
                 $scope.getMemberName($rootScope.ownGroup.groupMembers).then(function(names){
                     if(names != null){
                         $rootScope.ownGroup.groupMembers.nameList = names;
-                        
                         $scope.createOwnChart($rootScope.ownGroup.groupMembers.nameList, dataset).then(function(){
                             $rootScope.askAPI(Settings.Post, "fetch_group_stats", {}).then(function(response){
                                 if(response != null){
@@ -345,21 +370,14 @@ angular.module('starter').controller('StatisticsCtrl', function($q, $rootScope, 
                                     }
                                     $scope.groups.names = groupNames;
                                     $scope.groups.total_work_hours = groupHours;
-
                                     if($scope.allowedToSeeOthers){
                                         $scope.createOtherChart($scope.groups.names, $scope.groups.total_work_hours).then(function(){
-                                            fetchJSON = {
-                                                "email":$rootScope.profileSettings.email
-                                            }
-                                            $rootScope.askAPI(Settings.Post, "fetch_user_group_detailed_data", fetchJSON).then(function(response){
-                                                console.log(response);
-                                                $rootScope.hideWait();
-                                                deferred.resolve();
-                                            });
+                                            $rootScope.hideWait();
+                                            deferred.resolve();
                                         });
                                     }else{
-                                        $rootScope.hideWait();
-                                        deferred.resolve();
+                                            $rootScope.hideWait();
+                                            deferred.resolve();
                                     }
                                 } 
                             });

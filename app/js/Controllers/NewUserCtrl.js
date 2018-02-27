@@ -29,8 +29,6 @@ angular.module('starter').controller('NewUserCtrl', function($q, $scope, $rootSc
             Restangular.all("create_user").withHttpConfig().post(registerJSON).then(function(data) {
                 */
                 $scope.userInfo = {};
-                console.log("register with:");
-                console.log(registerJSON);
                 $scope.userInfo= {};
                 $state.go('tab.AddTask', {}, {
                     reload: true

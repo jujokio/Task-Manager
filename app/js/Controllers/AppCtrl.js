@@ -106,7 +106,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         var deferred = $q.defer();
         if(command == Settings.Post){
             var startTime = new Date().getTime();
-            Restangular.all(apiUrl).post(payloadJSON).then(function(response) {
+            Restangular.all(apiUrl).withHttpConfig({ timeout: 50000 }).post(payloadJSON).then(function(response) {
                 deferred.resolve(response);
 
                 },function(err){//Rest Post
@@ -119,7 +119,7 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
             });
         }else if(command == Settings.Get){
             var startTime = new Date().getTime();
-            Restangular.one(apiUrl).get(payloadJSON).then(function(response) {
+            Restangular.one(apiUrl).withHttpConfig({ timeout: 5000 }).get(payloadJSON).then(function(response) {
                 deferred.resolve(response);
 
                 },function(err){//Rest Get
@@ -399,14 +399,10 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
         }
         else if(!$rootScope.activationFlags.loading && !$rootScope.activationFlags.popupOpen){
             $rootScope.showWait('Logging out...');
-            console.log("profile settings:");
-            console.log($rootScope.profileSettings);
             var logOutJSON = {
                 "email":$rootScope.profileSettings.email,
                 "mac_address": $rootScope.profileSettings.cookie
             }
-            console.log("log out json:");
-            console.log(logOutJSON);
             $rootScope.askAPI(Settings.Post, "logout", logOutJSON).then(function(response){
                 $rootScope.activationFlags.isLoggedIn = false;
                 Restangular.setDefaultHeaders({'X-Api-Key': ''});
@@ -447,8 +443,6 @@ angular.module('starter').controller('AppCtrl', function($filter, $ionicScrollDe
                 "phone_number":[$rootScope.userInfo.phoneNumber]
             }
             $rootScope.askAPI(Settings.Post, "create_user", registerJSON).then(function(response){
-                console.log("register with:");
-                console.log(registerJSON);
                 $rootScope.userInfo= {};
                 $rootScope.hideWait();
                 $rootScope.activationFlags.loading = false;
